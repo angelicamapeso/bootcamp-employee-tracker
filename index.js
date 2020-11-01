@@ -25,9 +25,31 @@ async function connect() {
 
 async function runApp() {
   const action = await getMainMenuChoice();
-  console.log(action);
-  //switch case options
-  //return action
+  switch(action) {
+    case 'Add department':
+      console.log('Adding department ...');
+      break;
+    case 'View departments':
+      console.log('Viewing departments ...');
+      break;
+    case 'Add role':
+      console.log('Adding roles ...');
+      break;
+    case 'View roles':
+      console.log('Viewing roles ...');
+      break;
+    case 'Add employee':
+      console.log('Adding employees ...');
+      break;
+    case 'View employees':
+      console.log('Viewing employees ...');
+      break;
+    case 'Update employee role':
+      console.log('Updating employee role ...');
+      break;
+    default:
+      throw new Error('Invalid main menu action.');
+  }
 }
 
 async function getMainMenuChoice() {
