@@ -8,3 +8,5 @@ const connectionDetails = {
   password: 'root',
   database: 'employee_db',
 };
+
+let connection;
