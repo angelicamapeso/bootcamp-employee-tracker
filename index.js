@@ -10,6 +10,7 @@ main();
 async function main() {
   try {
     await connect();
+    await runApp();
   } catch(err) {
     console.error(err);
   } finally {
@@ -20,4 +21,10 @@ async function main() {
 async function connect() {
   connection = await mysql.createConnection(connectionDetails);
   console.log(`Connected with id: ${connection.threadId}`);
+}
+
+async function runApp() {
+  //getMainMenuChoice()
+  //switch case options
+  //return action
 }
