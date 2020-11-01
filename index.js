@@ -10,3 +10,12 @@ const connectionDetails = {
 };
 
 let connection;
+main();
+
+async function main() {
+  try {
+  } catch(err) {
+    console.error(err);
+  } finally {
+  }
+}
