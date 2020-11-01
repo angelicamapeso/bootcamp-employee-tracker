@@ -31,7 +31,7 @@ async function runApp() {
 }
 
 async function getMainMenuChoice() {
-  const mainMenuChoice = await inquirer.prompt([
+  const mainMenuChoices = await inquirer.prompt([
     {
       type: 'list',
       name: 'table',
@@ -74,5 +74,5 @@ async function getMainMenuChoice() {
       when: (currentAnswers) => { return currentAnswers.table === 'Employees'},
     },
   ]);
-  return mainMenuChoice;
+  return mainMenuChoices;
 }
