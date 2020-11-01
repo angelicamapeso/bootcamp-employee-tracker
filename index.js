@@ -74,5 +74,5 @@ async function getMainMenuChoice() {
       when: (currentAnswers) => { return currentAnswers.table === 'Employees'},
     },
   ]);
-  return mainMenuChoices;
+  return mainMenuChoices.action;
 }
