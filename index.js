@@ -24,8 +24,8 @@ async function connect() {
 }
 
 async function runApp() {
-  const mainMenuChoice = await getMainMenuChoice();
-  console.log(mainMenuChoice);
+  const action = await getMainMenuChoice();
+  console.log(action);
   //switch case options
   //return action
 }
