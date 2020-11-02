@@ -40,6 +40,7 @@ async function runApp() {
       break;
     case 'View roles':
       console.log('Viewing roles ...');
+      await viewRoles();
       break;
     case 'Add employee':
       console.log('Adding employees ...');
@@ -178,4 +179,9 @@ async function addRole() {
   const roleInfo = await askRoleInfo();
   await connection.query('INSERT INTO role SET ?', roleInfo);
   console.log('Role successfully added!');
+}
+
+async function viewRoles() {
+  const [roles] = await connection.query('SELECT * FROM role');
+  console.table(roles);
 }
