@@ -244,3 +244,14 @@ async function addEmployee() {
   await connection.query('INSERT INTO employee SET ?', employeeInfo);
   console.log('Employee successfully added!');
 }
+
+async function getEmployeesWithTitles() {
+  const query = `
+  SELECT employee.id, employee.first_name, employee.last_name, role.title
+  FROM employee
+  LEFT JOIN role ON employee.role_id = role.id;
+  `
+  const [employees] = await connection.query(query);
+  console.log(employees);
+  return employees;
+}
