@@ -32,6 +32,7 @@ async function runApp() {
       break;
     case 'View departments':
       console.log('Viewing departments ...');
+      await viewDepartments();
       break;
     case 'Add role':
       console.log('Adding roles ...');
@@ -119,4 +120,9 @@ async function addDepartment() {
     name: depName,
   });
   console.log('Department added successfully!');
+}
+
+async function viewDepartments() {
+  const [departments] = await connection.query('SELECT * FROM department');
+  console.table(departments);
 }
