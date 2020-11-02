@@ -76,7 +76,7 @@ async function getMainMenuChoice() {
         'Add department',
         'View departments',
       ],
-      when: (currentAnswers) => { return currentAnswers.table === 'Departments'},
+      when: currentAnswers => currentAnswers.table === 'Departments',
     },
     {
       type: 'list',
@@ -86,7 +86,7 @@ async function getMainMenuChoice() {
         'Add role',
         'View roles',
       ],
-      when: (currentAnswers) => { return currentAnswers.table === 'Roles'},
+      when: currentAnswers => currentAnswers.table === 'Roles',
     },
     {
       type: 'list',
@@ -97,7 +97,7 @@ async function getMainMenuChoice() {
         'View employees',
         'Update employee role'
       ],
-      when: (currentAnswers) => { return currentAnswers.table === 'Employees'},
+      when: currentAnswers => currentAnswers.table === 'Employees',
     },
   ]);
   return mainMenuChoices.action;
@@ -109,8 +109,8 @@ async function askDepartmentInfo() {
       type: 'input',
       name: 'depName',
       message: 'What is the name of the new department?',
-      validate: (name) => { return name.trim() ? true : 'Department name cannot be empty!'; },
-      filter: (name) => { return name.trim(); },
+      validate: name => name.trim() ? true : 'Department name cannot be empty!',
+      filter: name => name.trim(),
     }
   ]);
   return departmentInfo;
