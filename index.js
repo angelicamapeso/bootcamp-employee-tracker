@@ -123,7 +123,7 @@ async function addDepartment() {
 }
 
 async function viewDepartments() {
-  const [departments] = await connection.query('SELECT * FROM department');
+  const departments = await getDepartments();
   console.table(departments);
 }
 
