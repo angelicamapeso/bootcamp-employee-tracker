@@ -44,6 +44,7 @@ async function runApp() {
       break;
     case 'Add employee':
       console.log('Adding employees ...');
+      await addEmployee();
       break;
     case 'View employees':
       console.log('Viewing employees ...');
@@ -236,4 +237,10 @@ async function askEmployeeInfo() {
     }
   ]);
   return employeeInfo;
+}
+
+async function addEmployee() {
+  const employeeInfo = await askEmployeeInfo();
+  await connection.query('INSERT INTO employee SET ?', employeeInfo);
+  console.log('Employee successfully added!');
 }
