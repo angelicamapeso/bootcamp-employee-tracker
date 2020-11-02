@@ -188,3 +188,8 @@ async function viewRoles() {
   const roles = await getRoles();
   console.table(roles);
 }
+
+async function getEmployees() {
+  const [employees] = await connection.query('SELECT * FROM employee');
+  return employees;
+}
