@@ -110,7 +110,7 @@ async function askDepartmentInfo() {
       type: 'input',
       name: 'name',
       message: 'What is the name of the new department?',
-      validate: name => name.trim() ? true : 'Department name cannot be empty!',
+      validate: name => name ? true : 'Department name cannot be empty!',
       filter: name => name.trim(),
     }
   ]);
@@ -140,7 +140,7 @@ async function askRoleInfo() {
       type: 'input',
       name: 'title',
       message: 'What is the title of the new role?',
-      validate: title => title.trim() ? true : 'Role title cannot be empty!',
+      validate: title => title ? true : 'Role title cannot be empty!',
       filter: title => title.trim(),
     },
     {
