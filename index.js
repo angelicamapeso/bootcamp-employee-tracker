@@ -126,3 +126,8 @@ async function viewDepartments() {
   const [departments] = await connection.query('SELECT * FROM department');
   console.table(departments);
 }
+
+async function getDepartments() {
+  const [departments] = await connection.query('SELECT * FROM department');
+  return departments;
+}
