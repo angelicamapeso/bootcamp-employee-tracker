@@ -131,3 +131,44 @@ async function getDepartments() {
   const [departments] = await connection.query('SELECT * FROM department');
   return departments;
 }
+
+async function askRoleInfo() {
+  const departments = await getDepartments();
+  const roleInfo = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'title',
+      message: 'What is the title of the new role?',
+      validate: title => title.trim() ? true : 'Role title cannot be empty!',
+      filter: title => title.trim(),
+    },
+    {
+      type: 'input',
+      name: 'salary',
+      message: 'What is the salary of the new role?',
+      validate: salary => {
+        if (salary) {
+          if (isNaN(salary)) {
+            return 'Salary must be a number.';
+          } else if (salary < 0) {
+            return 'Salary cannot be negative.';
+          } else {
+            return true;
+          }
+        } else {
+          return 'Salary cannot be empty!';
+        }
+      },
+      filter: salary => salary.trim(),
+    },
+    {
+      type: 'list',
+      name: 'department_id',
+      message: 'What department does this role belong to?',
+      choices: () => departments.map(department =>
+        { return {name: department.name, value: department.id} }
+      ),
+    }
+  ]);
+  return roleInfo;
+}
