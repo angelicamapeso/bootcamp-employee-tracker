@@ -7,8 +7,11 @@ const connectionDetails = require('./assets/connectionDetails.js');
 let connection;
 main();
 
+//TODO: move database functions to separate file
+
 async function main() {
   try {
+    //TODO: add loop to keep asking for menu prompts
     await connect();
     await runApp();
   } catch(err) {
@@ -28,30 +31,37 @@ async function runApp() {
   switch(action) {
     case 'Add department':
       console.log('Adding department ...');
+      //TODO: ensure function returns true/false
       await addDepartment();
       break;
     case 'View departments':
       console.log('Viewing departments ...');
+      //TODO: ensure function returns true/false
       await viewDepartments();
       break;
     case 'Add role':
       console.log('Adding roles ...');
+      //TODO: ensure function returns true/false
       await addRole();
       break;
     case 'View roles':
       console.log('Viewing roles ...');
+      //TODO: ensure function returns true/false
       await viewRoles();
       break;
     case 'Add employee':
       console.log('Adding employees ...');
+      //TODO: ensure function returns true/false
       await addEmployee();
       break;
     case 'View employees':
       console.log('Viewing employees ...');
+      //TODO: ensure function returns true/false
       await viewEmployees();
       break;
     case 'Update employee role':
       console.log('Updating employee role ...');
+      //TODO: ensure function returns true/false
       await updateEmployeeRole();
       break;
     default:
