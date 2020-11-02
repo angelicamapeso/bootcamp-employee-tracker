@@ -28,6 +28,7 @@ async function runApp() {
   switch(action) {
     case 'Add department':
       console.log('Adding department ...');
+      await addDepartment();
       break;
     case 'View departments':
       console.log('Viewing departments ...');
@@ -110,4 +111,12 @@ async function askDepartmentInfo() {
     }
   ]);
   return departmentInfo;
+}
+
+async function addDepartment() {
+  const {depName} = await askDepartmentInfo();
+  await connection.query('INSERT INTO department SET ?', {
+    name: depName,
+  });
+  console.log('Department added successfully!');
 }
