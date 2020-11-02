@@ -107,7 +107,7 @@ async function askDepartmentInfo() {
   const departmentInfo = await inquirer.prompt([
     {
       type: 'input',
-      name: 'depName',
+      name: 'name',
       message: 'What is the name of the new department?',
       validate: name => name.trim() ? true : 'Department name cannot be empty!',
       filter: name => name.trim(),
@@ -117,10 +117,8 @@ async function askDepartmentInfo() {
 }
 
 async function addDepartment() {
-  const {depName} = await askDepartmentInfo();
-  await connection.query('INSERT INTO department SET ?', {
-    name: depName,
-  });
+  const departmentInfo = await askDepartmentInfo();
+  await connection.query('INSERT INTO department SET ?', departmentInfo);
   console.log('Department added successfully!');
 }
 
