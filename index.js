@@ -98,3 +98,16 @@ async function getMainMenuChoice() {
   ]);
   return mainMenuChoices.action;
 }
+
+async function askDepartmentInfo() {
+  const departmentInfo = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'depName',
+      message: 'What is the name of the new department?',
+      validate: (name) => { return name.trim() ? true : 'Department name cannot be empty!'; },
+      filter: (name) => { return name.trim(); },
+    }
+  ]);
+  return departmentInfo;
+}
