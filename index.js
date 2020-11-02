@@ -47,6 +47,7 @@ async function runApp() {
       break;
     case 'View employees':
       console.log('Viewing employees ...');
+      await viewEmployees();
       break;
     case 'Update employee role':
       console.log('Updating employee role ...');
@@ -192,4 +193,9 @@ async function viewRoles() {
 async function getEmployees() {
   const [employees] = await connection.query('SELECT * FROM employee');
   return employees;
+}
+
+async function viewEmployees() {
+  const employees = await getEmployees();
+  console.table(employees);
 }
