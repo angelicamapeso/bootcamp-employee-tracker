@@ -52,6 +52,7 @@ async function runApp() {
       break;
     case 'Update employee role':
       console.log('Updating employee role ...');
+      await updateEmployeeRole();
       break;
     default:
       throw new Error('Invalid main menu action.');
@@ -282,4 +283,10 @@ async function askUpdateEmployeeRole() {
     },
   ]);
   return updateEmployeeRoleInfo;
+}
+
+async function updateEmployeeRole() {
+  const {id, role_id} = await askUpdateEmployeeRole();
+  await connection.query('UPDATE employee SET ? WHERE ?', [{role_id}, {id}]);
+  console.log('Successfully updated employee role!');
 }
