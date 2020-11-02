@@ -36,6 +36,7 @@ async function runApp() {
       break;
     case 'Add role':
       console.log('Adding roles ...');
+      await addRole();
       break;
     case 'View roles':
       console.log('Viewing roles ...');
@@ -171,4 +172,10 @@ async function askRoleInfo() {
     }
   ]);
   return roleInfo;
+}
+
+async function addRole() {
+  const roleInfo = await askRoleInfo();
+  await connection.query('INSERT INTO role SET ?', roleInfo);
+  console.log('Role successfully added!');
 }
