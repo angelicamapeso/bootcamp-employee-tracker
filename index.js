@@ -113,46 +113,10 @@ async function viewEmployees() {
   console.table(employees);
 }
 
-async function askEmployeeInfo() {
+async function addEmployee() {
   const roles = await getRoles();
   const employees = await getEmployees();
-  const employeeInfo = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'first_name',
-      message: 'What is the first name of the employee?',
-      validate: (name) => name ? true : 'First name cannot be empty!',
-      filter: name => name.trim(),
-    },
-    {
-      type: 'input',
-      name: 'last_name',
-      message: 'What is the last name of the employee?',
-      validate: (name) => name ? true : 'Last name cannot be empty!',
-      filter: name => name.trim(),
-    },
-    {
-      type: 'list',
-      name: 'role_id',
-      message: 'What role does the employee have?',
-      choices: () => roles.map(role =>
-        {return {name: role.title, value: role.id}}
-      ),
-    },
-    {
-      type: 'list',
-      name: 'manager_id',
-      message: "Who is the employee's manager?",
-      choices: () => employees.map(employee =>
-        {return {name: employee.first_name + ' ' + employee.last_name, value: employee.id }}
-      ),
-    }
-  ]);
-  return employeeInfo;
-}
-
-async function addEmployee() {
-  const employeeInfo = await askEmployeeInfo();
+  const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await connection.query('INSERT INTO employee SET ?', employeeInfo);
   console.log('Employee successfully added!');
 }
