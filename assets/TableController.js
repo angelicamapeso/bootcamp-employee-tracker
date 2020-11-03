@@ -51,12 +51,6 @@ TableController.prototype.selectFields = async function (fields) {
   }
 }
 
-TableController.formatField = function (field, tableName) {
-  return (tableName ? tableName + '.' : '')
-    + mysql.escapeId(field.name)
-    + (field.as ? ' AS ' + mysql.escape(field.as) : '');
-}
-
 TableController.prototype.getLeftJoinQuery = function({selectFields, joins, leftAlias}) {
   const formattedSelectFields = selectFields.map(field => field.formatFieldForQuery());
   let leftJoinQuery = `
