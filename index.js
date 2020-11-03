@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const consoleTable = require('console.table');
 
 const connectionDetails = require('./assets/connectionDetails.js');
+const prompts = require('./assets/prompts.js');
 
 let connection;
 main();
