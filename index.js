@@ -116,11 +116,6 @@ async function viewRoles() {
   console.table(roles);
 }
 
-async function getEmployees() {
-  const [employees] = await connection.query('SELECT * FROM employee');
-  return employees;
-}
-
 async function viewEmployees() {
   // const employees = await getEmployees();
   const employeeAlias = 'e';
@@ -154,7 +149,7 @@ async function viewEmployees() {
 
 async function addEmployee() {
   const roles = await roleTable.selectAll();
-  const employees = await getEmployees();
+  const employees = await employeeTable.selectAll();
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await connection.query('INSERT INTO employee SET ?', employeeInfo);
   console.log('Employee successfully added!');
