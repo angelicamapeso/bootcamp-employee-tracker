@@ -79,17 +79,12 @@ async function addDepartment() {
 }
 
 async function viewDepartments() {
-  const departments = await getDepartments();
+  const departments = await departmentTable.selectAll();
   console.table(departments);
 }
 
-async function getDepartments() {
-  const [departments] = await connection.query('SELECT * FROM department');
-  return departments;
-}
-
 async function addRole() {
-  const departments = await getDepartments();
+  const departments = await departmentTable.selectAll();
   const roleInfo = await prompts.askRoleInfo(departments);
   await connection.query('INSERT INTO role SET ?', roleInfo);
   console.log('Role successfully added!');
