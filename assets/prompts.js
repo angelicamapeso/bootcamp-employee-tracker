@@ -136,9 +136,36 @@ async function askEmployeeInfo(roles, employees) {
   return employeeInfo;
 }
 
+async function askUpdateEmployeeRole(employees, roles) {
+  const updateEmployeeRoleInfo = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'id',
+      message: "Which employee's role would you like to update?",
+      choices: () => employees.map(employee =>
+        { return {
+          name: `${employee.first_name} ${employee.last_name} | ${employee.title}`,
+          value: employee.id,
+          }
+        }
+      ),
+    },
+    {
+      type: 'list',
+      name: 'role_id',
+      message: 'What role would you like to give the employee?',
+      choices: () => roles.map(role =>
+        {return {name: role.title, value: role.id}}
+      ),
+    },
+  ]);
+  return updateEmployeeRoleInfo;
+}
+
 module.exports = {
   mainMenu,
   askDepartmentInfo,
   askRoleInfo,
   askEmployeeInfo,
+  askUpdateEmployeeRole,
 };
