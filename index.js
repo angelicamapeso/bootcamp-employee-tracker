@@ -98,7 +98,30 @@ async function getRoles() {
 }
 
 async function viewRoles() {
-  const roles = await getRoles();
+  const roles = await roleTable.leftJoin({
+    leftFields: [
+      {
+        name: 'id',
+        as: 'ID',
+      },
+      {
+        name: 'title',
+        as: 'Title',
+      },
+      { name: 'salary',
+        as: 'Salary',
+      }
+    ],
+    rightFields: [
+      {
+        name: 'name',
+        as: 'Department'
+      }
+    ],
+    joinTableName: departmentTable.name,
+    leftJoinField: { name: 'department_id'},
+    rightJoinField: { name: 'id' },
+  });
   console.table(roles);
 }
 
