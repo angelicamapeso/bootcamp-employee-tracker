@@ -136,7 +136,7 @@ async function viewEmployees() {
 }
 
 async function addEmployee() {
-  const roles = await getRoles();
+  const roles = await roleTable.selectAll();
   const employees = await getEmployees();
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await connection.query('INSERT INTO employee SET ?', employeeInfo);
@@ -156,7 +156,7 @@ async function getEmployeesWithTitles() {
 
 async function updateEmployeeRole() {
   const employees = await getEmployeesWithTitles();
-  const roles = await getRoles();
+  const roles = await roleTable.selectAll();
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
   await connection.query('UPDATE employee SET ? WHERE ?', [{role_id}, {id}]);
   console.log('Successfully updated employee role!');
