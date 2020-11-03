@@ -57,17 +57,16 @@ TableController.formatField = function (field, tableName) {
     + (field.as ? ' AS ' + mysql.escape(field.as) : '');
 }
 
-TableController.prototype.getLeftJoinQuery = function({leftFields, rightFields, joinTableName, leftJoinField, rightJoinField}) {
-  const formattedLeftFields = leftFields.map(field => TableController.formatField(field, this.name));
-  const formattedRightFields = rightFields.map(field => TableController.formatField(field, joinTableName));
-  const formattedLeftJoinField = TableController.formatField(leftJoinField, this.name);
-  const formattedRightJoinField = TableController.formatField(rightJoinField, joinTableName);
-
-  const leftJoinQuery = `
-    SELECT  ${formattedLeftFields.join(', ')} , ${formattedRightFields.join(', ')}
-    FROM ${this.name}
-    LEFT JOIN ${joinTableName} ON ${formattedLeftJoinField} = ${formattedRightJoinField}
-  `;
+TableController.prototype.getLeftJoinQuery = function({selectFields, joins}) {
+  const formattedSelectFields = selectFields.map(field => field.formatFieldForQuery());
+  let leftJoinQuery = `
+    SELECT ${formattedSelectFields.join(',')}
+    FROM ${this.name}`;
+  joins.forEach(function(join){
+    leftJoinQuery += `
+      LEFT JOIN ${join.right.tableName} ${join.right.tableAlias ? join.right.tableAlias : ''}
+      ON ${join.left.formatFieldForQuery()} = ${join.right.formatFieldForQuery()}`;
+  });
   return leftJoinQuery;
 }
 

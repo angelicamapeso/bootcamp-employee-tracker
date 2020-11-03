@@ -105,29 +105,43 @@ async function addRole() {
 }
 
 async function viewRoles() {
+  // const roles = await roleTable.leftJoin({
+  //   leftFields: [
+  //     {
+  //       name: 'id',
+  //       as: 'ID',
+  //     },
+  //     {
+  //       name: 'title',
+  //       as: 'Title',
+  //     },
+  //     { name: 'salary',
+  //       as: 'Salary',
+  //     }
+  //   ],
+  //   rightFields: [
+  //     {
+  //       name: 'name',
+  //       as: 'Department'
+  //     }
+  //   ],
+  //   joinTableName: departmentTable.name,
+  //   leftJoinField: { name: 'department_id'},
+  //   rightJoinField: { name: 'id' },
+  // });
   const roles = await roleTable.leftJoin({
-    leftFields: [
-      {
-        name: 'id',
-        as: 'ID',
-      },
-      {
-        name: 'title',
-        as: 'Title',
-      },
-      { name: 'salary',
-        as: 'Salary',
-      }
+    selectFields: [
+      new Field('id', roleTable.name).setAlias('ID'),
+      new Field('title', roleTable.name).setAlias('Title'),
+      new Field('salary', roleTable.name).setAlias('Salary'),
+      new Field('name', departmentTable.name).setAlias('Department'),
     ],
-    rightFields: [
+    joins: [
       {
-        name: 'name',
-        as: 'Department'
+        left: new Field('department_id', roleTable.name),
+        right: new Field('id', departmentTable.name),
       }
-    ],
-    joinTableName: departmentTable.name,
-    leftJoinField: { name: 'department_id'},
-    rightJoinField: { name: 'id' },
+    ]
   });
   console.table(roles);
 }
