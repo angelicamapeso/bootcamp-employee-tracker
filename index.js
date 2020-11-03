@@ -83,14 +83,16 @@ async function addDepartment() {
 
 async function viewDepartments() {
   const departments = await departmentTable.selectFields([
-    {
-      name: 'id',
-      as: 'ID',
-    },
-    {
-      name: 'name',
-      as: 'Department Name'
-    }
+    // {
+    //   name: 'id',
+    //   as: 'ID',
+    // },
+    // {
+    //   name: 'name',
+    //   as: 'Department Name'
+    // }
+    new Field('id').setAlias('ID'),
+    new Field('name').setAlias('Department Name'),
   ]);
   console.table(departments);
 }

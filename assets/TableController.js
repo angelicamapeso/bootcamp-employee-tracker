@@ -42,7 +42,7 @@ TableController.prototype.selectAll = async function() {
 TableController.prototype.selectFields = async function (fields) {
   try {
     this.checkConnection();
-    const formattedFields = fields.map(field => TableController.formatField(field));
+    const formattedFields = fields.map(field => field.formatFieldForQuery());
     const selectQuery = `SELECT ${formattedFields.join(', ')} FROM ${this.name}`;
     const [data] = await this.connection.query(selectQuery);
     return data;
