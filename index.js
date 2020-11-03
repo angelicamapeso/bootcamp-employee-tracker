@@ -92,11 +92,6 @@ async function addRole() {
   console.log('Role successfully added!');
 }
 
-async function getRoles() {
-  const [roles] = await connection.query('SELECT * FROM role');
-  return roles;
-}
-
 async function viewRoles() {
   const roles = await roleTable.leftJoin({
     leftFields: [
