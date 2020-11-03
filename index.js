@@ -88,7 +88,7 @@ async function viewDepartments() {
 async function addRole() {
   const departments = await departmentTable.selectAll();
   const roleInfo = await prompts.askRoleInfo(departments);
-  await connection.query('INSERT INTO role SET ?', roleInfo);
+  roleTable.insert(roleInfo);
   console.log('Role successfully added!');
 }
 
