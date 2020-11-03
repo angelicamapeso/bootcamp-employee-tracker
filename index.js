@@ -172,6 +172,7 @@ async function updateEmployeeRole() {
   });
   const roles = await roleTable.selectAll();
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
-  await connection.query('UPDATE employee SET ? WHERE ?', [{role_id}, {id}]);
+  // await connection.query('UPDATE employee SET ? WHERE ?', [{role_id}, {id}]);
+  employeeTable.update({role_id}, {id});
   console.log('Successfully updated employee role!');
 }
