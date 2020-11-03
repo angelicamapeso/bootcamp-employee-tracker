@@ -74,7 +74,7 @@ async function runApp() {
 
 async function addDepartment() {
   const departmentInfo = await prompts.askDepartmentInfo();
-  await connection.query('INSERT INTO department SET ?', departmentInfo);
+  await departmentTable.insert(departmentInfo);
   console.log('Department added successfully!');
 }
 
