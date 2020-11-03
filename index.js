@@ -9,6 +9,7 @@ const Field = require('./assets/Field.js');
 let connection;
 const departmentTable = new TableController('department');
 const roleTable = new TableController('role');
+const employeeTable = new TableController('employee');
 main();
 
 //TODO: move database functions to separate file
