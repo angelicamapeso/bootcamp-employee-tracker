@@ -4,6 +4,7 @@ const consoleTable = require('console.table');
 const connectionDetails = require('./assets/connectionDetails.js');
 const prompts = require('./assets/prompts.js');
 const TableController = require('./assets/TableController.js');
+const Field = require('./assets/Field.js');
 
 let connection;
 const departmentTable = new TableController('department');
