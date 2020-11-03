@@ -122,7 +122,33 @@ async function getEmployees() {
 }
 
 async function viewEmployees() {
-  const employees = await getEmployees();
+  // const employees = await getEmployees();
+  const employeeAlias = 'e';
+  const managerAlias = 'm';
+  const employees = await employeeTable.leftJoin({
+    selectFields: [
+      new Field('id', employeeTable.name, employeeAlias).setAlias('ID'),
+      new Field('employeeName').setCustom(`
+        CONCAT(${mysql.escapeId(employeeAlias)}.${mysql.escapeId('first_name')}, ' ',
+        ${mysql.escapeId(employeeAlias)}.${mysql.escapeId('last_name')})`)
+          .setAlias('Employee'),
+      new Field('title', roleTable.name).setAlias('Role'),
+      new Field('managerName').setCustom(`CONCAT(${mysql.escapeId(managerAlias)}.${mysql.escapeId('first_name')}, ' ',
+        ${mysql.escapeId(managerAlias)}.${mysql.escapeId('last_name')})`)
+          .setAlias('Manager'),
+    ],
+    joins: [
+      {
+        left: new Field('manager_id', employeeTable.name, employeeAlias),
+        right: new Field('id', employeeTable.name, managerAlias),
+      },
+      {
+        left: new Field('role_id', employeeTable.name, employeeAlias),
+        right: new Field('id', roleTable.name),
+      }
+    ],
+    leftAlias: mysql.escapeId(employeeAlias),
+  });
   console.table(employees);
 }
 
