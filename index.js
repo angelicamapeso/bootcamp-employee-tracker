@@ -27,6 +27,7 @@ async function main() {
 async function connect() {
   connection = await mysql.createConnection(connectionDetails);
   departmentTable.setConnection(connection);
+  roleTable.setConnection(connection);
   console.log(`Connected with id: ${connection.threadId}`);
 }
 
