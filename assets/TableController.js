@@ -75,4 +75,17 @@ TableController.prototype.leftJoin = async function(joinInfo) {
   }
 }
 
+TableController.prototype.update = async function(set, identifier) {
+  try {
+    const updateQuery = `
+      UPDATE ${this.name}
+      SET ?
+      WHERE ?`;
+    this.checkConnection();
+    await this.connection.query(updateQuery, [set, identifier]);
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 module.exports = TableController;
