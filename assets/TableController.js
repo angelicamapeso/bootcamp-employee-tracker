@@ -38,6 +38,18 @@ TableController.prototype.selectAll = async function() {
   }
 }
 
+TableController.prototype.selectFields = async function (fields) {
+  try {
+    this.checkConnection();
+    const formattedFields = fields.map(field => TableController.formatField(field));
+    const selectQuery = `SELECT ${formattedFields.join(', ')} FROM ${this.name}`;
+    const [data] = await this.connection.query(selectQuery);
+    return data;
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 TableController.formatField = function (field, tableName) {
   return (tableName ? tableName + '.' : '')
     + mysql.escapeId(field.name)
