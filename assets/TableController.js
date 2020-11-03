@@ -57,11 +57,11 @@ TableController.formatField = function (field, tableName) {
     + (field.as ? ' AS ' + mysql.escape(field.as) : '');
 }
 
-TableController.prototype.getLeftJoinQuery = function({selectFields, joins}) {
+TableController.prototype.getLeftJoinQuery = function({selectFields, joins, leftAlias}) {
   const formattedSelectFields = selectFields.map(field => field.formatFieldForQuery());
   let leftJoinQuery = `
     SELECT ${formattedSelectFields.join(',')}
-    FROM ${this.name}`;
+    FROM ${this.name} ${leftAlias ? leftAlias : ''}`;
   joins.forEach(function(join){
     leftJoinQuery += `
       LEFT JOIN ${join.right.tableName} ${join.right.tableAlias ? join.right.tableAlias : ''}
