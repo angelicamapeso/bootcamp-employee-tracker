@@ -7,6 +7,7 @@ const TableController = require('./assets/TableController.js');
 
 let connection;
 const departmentTable = new TableController('department');
+const roleTable = new TableController('role');
 main();
 
 //TODO: move database functions to separate file
