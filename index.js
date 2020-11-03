@@ -83,14 +83,6 @@ async function addDepartment() {
 
 async function viewDepartments() {
   const departments = await departmentTable.selectFields([
-    // {
-    //   name: 'id',
-    //   as: 'ID',
-    // },
-    // {
-    //   name: 'name',
-    //   as: 'Department Name'
-    // }
     new Field('id').setAlias('ID'),
     new Field('name').setAlias('Department Name'),
   ]);
@@ -105,30 +97,6 @@ async function addRole() {
 }
 
 async function viewRoles() {
-  // const roles = await roleTable.leftJoin({
-  //   leftFields: [
-  //     {
-  //       name: 'id',
-  //       as: 'ID',
-  //     },
-  //     {
-  //       name: 'title',
-  //       as: 'Title',
-  //     },
-  //     { name: 'salary',
-  //       as: 'Salary',
-  //     }
-  //   ],
-  //   rightFields: [
-  //     {
-  //       name: 'name',
-  //       as: 'Department'
-  //     }
-  //   ],
-  //   joinTableName: departmentTable.name,
-  //   leftJoinField: { name: 'department_id'},
-  //   rightJoinField: { name: 'id' },
-  // });
   const roles = await roleTable.leftJoin({
     selectFields: [
       new Field('id', roleTable.name).setAlias('ID'),
