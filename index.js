@@ -6,7 +6,7 @@ const prompts = require('./assets/prompts.js');
 const TableController = require('./assets/TableController.js');
 
 let connection;
-let departmentTable = new TableController('department');
+const departmentTable = new TableController('department');
 main();
 
 //TODO: move database functions to separate file
