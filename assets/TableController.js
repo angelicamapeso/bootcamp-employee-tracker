@@ -43,4 +43,18 @@ TableController.formatField = function (field, tableName) {
     + mysql.escapeId(field.name)
     + (field.as ? ' AS ' + mysql.escape(field.as) : '');
 }
+
+TableController.prototype.getLeftJoinQuery = function({leftFields, rightFields, joinTableName, leftJoinField, rightJoinField}) {
+  const formattedLeftFields = leftFields.map(field => TableController.formatField(field, this.name));
+  const formattedRightFields = rightFields.map(field => TableController.formatField(field, joinTableName));
+  const formattedLeftJoinField = TableController.formatField(leftJoinField, this.name);
+  const formattedRightJoinField = TableController.formatField(rightJoinField, joinTableName);
+
+  const leftJoinQuery = `
+    SELECT  ${formattedLeftFields.join(', ')} , ${formattedRightFields.join(', ')}
+    FROM ${this.name}
+    LEFT JOIN ${joinTableName} ON ${formattedLeftJoinField} = ${formattedRightJoinField}
+  `;
+  return leftJoinQuery;
+}
 module.exports = TableController;
