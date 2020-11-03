@@ -57,4 +57,16 @@ TableController.prototype.getLeftJoinQuery = function({leftFields, rightFields, 
   `;
   return leftJoinQuery;
 }
+
+TableController.prototype.leftJoin = async function(joinInfo) {
+  try {
+    const leftJoinQuery = this.getLeftJoinQuery(joinInfo);
+    this.checkConnection();
+    const [data] = await this.connection.query(leftJoinQuery);
+    return data;
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 module.exports = TableController;
