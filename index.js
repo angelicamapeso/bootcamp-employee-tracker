@@ -155,19 +155,21 @@ async function addEmployee() {
   console.log('Employee successfully added!');
 }
 
-async function getEmployeesWithTitles() {
-  const query = `
-  SELECT employee.id, employee.first_name, employee.last_name, role.title
-  FROM employee
-  LEFT JOIN role ON employee.role_id = role.id;
-  `
-  const [employees] = await connection.query(query);
-  console.log(employees);
-  return employees;
-}
-
 async function updateEmployeeRole() {
-  const employees = await getEmployeesWithTitles();
+  const employees = await employeeTable.leftJoin({
+    selectFields: [
+      new Field('id', employeeTable.name),
+      new Field('first_name', employeeTable.name),
+      new Field('last_name', employeeTable.name),
+      new Field('title', roleTable.name)
+    ],
+    joins: [
+      {
+        left: new Field('role_id', employeeTable.name),
+        right: new Field('id', roleTable.name),
+      }
+    ]
+  });
   const roles = await roleTable.selectAll();
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
   await connection.query('UPDATE employee SET ? WHERE ?', [{role_id}, {id}]);
