@@ -38,4 +38,9 @@ TableController.prototype.selectAll = async function() {
   }
 }
 
+TableController.formatField = function (field, tableName) {
+  return (tableName ? tableName + '.' : '')
+    + mysql.escapeId(field.name)
+    + (field.as ? ' AS ' + mysql.escape(field.as) : '');
+}
 module.exports = TableController;
