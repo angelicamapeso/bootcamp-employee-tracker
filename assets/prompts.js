@@ -15,7 +15,7 @@ async function mainMenu() {
     {
       type: 'list',
       name: 'table',
-      message: 'Which would you like to modify?',
+      message: 'Select a table you would like to perform actions on:',
       choices: [...mainMenuChoices.tables,
         new inquirer.Separator(),
         QUIT,
