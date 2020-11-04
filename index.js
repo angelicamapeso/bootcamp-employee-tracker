@@ -104,7 +104,7 @@ async function addDepartment() {
 
 async function viewDepartments() {
   const departments = await departmentTable.selectWithAlias();
-  console.table(departments);
+  console.table('DEPARTMENTS',departments);
 }
 
 async function addRole() {
