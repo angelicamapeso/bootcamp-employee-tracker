@@ -3,7 +3,6 @@ const consoleTable = require('console.table');
 
 const connectionDetails = require('./assets/constants/connectionDetails.js');
 const prompts = require('./assets/prompts.js');
-const TableController = require('./assets/tableControllers/TableController.js');
 
 const mainMenuChoices = require('./assets/constants/mainMenuChoices.js');
 
