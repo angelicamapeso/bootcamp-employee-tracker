@@ -18,10 +18,10 @@ const departmentTable = require('./assets/tableControllers/departmentController.
 const roleTable = require('./assets/tableControllers/roleController.js');
 const employeeTable = require('./assets/tableControllers/employeeController.js');
 
-//Runs application
-main();
+//Starts application
+init();
 
-async function main() {
+async function init() {
   try {
     //TODO: add loop to keep asking for menu prompts
     await connect();
