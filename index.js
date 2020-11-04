@@ -25,7 +25,10 @@ async function init() {
   try {
     //TODO: add loop to keep asking for menu prompts
     await connect();
-    await runApp();
+    let canContinue = true;
+    while (canContinue) {
+      canContinue = await runApp();
+    }
   } catch(err) {
     console.error(err);
   } finally {
@@ -56,37 +59,37 @@ async function runApp() {
       console.log('Adding department ...');
       //TODO: ensure function returns true/false
       await addDepartment();
-      break;
+      return true;
     case VIEW_DEPARTMENTS:
       console.log('Viewing departments ...');
       //TODO: ensure function returns true/false
       await viewDepartments();
-      break;
+      return true;
     case ADD_ROLE:
       console.log('Adding roles ...');
       //TODO: ensure function returns true/false
       await addRole();
-      break;
+      return true;
     case VIEW_ROLES:
       console.log('Viewing roles ...');
       //TODO: ensure function returns true/false
       await viewRoles();
-      break;
+      return true;
     case ADD_EMPLOYEE:
       console.log('Adding employees ...');
       //TODO: ensure function returns true/false
       await addEmployee();
-      break;
+      return true;
     case VIEW_EMPLOYEES:
       console.log('Viewing employees ...');
       //TODO: ensure function returns true/false
       await viewEmployees();
-      break;
+      return true;
     case UPDATE_EMPLOYEE_ROLE:
       console.log('Updating employee role ...');
       //TODO: ensure function returns true/false
       await updateEmployeeRole();
-      break;
+      return true;
     default:
       throw new Error('Invalid main menu action.');
   }
