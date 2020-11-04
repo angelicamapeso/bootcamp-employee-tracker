@@ -7,7 +7,7 @@ const TableController = require('./assets/TableController.js');
 
 let connection;
 const departmentTable = require('./assets/departmentController.js')
-const roleTable = new TableController('role');
+const roleTable = require('./assets/roleController.js');
 const employeeTable = new TableController('employee');
 main();
 
