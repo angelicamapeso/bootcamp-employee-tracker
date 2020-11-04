@@ -42,37 +42,37 @@ async function runApp() {
   const [ADD_EMPLOYEE, VIEW_EMPLOYEES, UPDATE_EMPLOYEE_ROLE] = mainMenuChoices.employeeActions;
 
   switch(action) {
-    case 'Add department':
+    case ADD_DEPARTMENT:
       console.log('Adding department ...');
       //TODO: ensure function returns true/false
       await addDepartment();
       break;
-    case 'View departments':
+    case VIEW_DEPARTMENTS:
       console.log('Viewing departments ...');
       //TODO: ensure function returns true/false
       await viewDepartments();
       break;
-    case 'Add role':
+    case ADD_ROLE:
       console.log('Adding roles ...');
       //TODO: ensure function returns true/false
       await addRole();
       break;
-    case 'View roles':
+    case VIEW_ROLES:
       console.log('Viewing roles ...');
       //TODO: ensure function returns true/false
       await viewRoles();
       break;
-    case 'Add employee':
+    case ADD_EMPLOYEE:
       console.log('Adding employees ...');
       //TODO: ensure function returns true/false
       await addEmployee();
       break;
-    case 'View employees':
+    case VIEW_EMPLOYEES:
       console.log('Viewing employees ...');
       //TODO: ensure function returns true/false
       await viewEmployees();
       break;
-    case 'Update employee role':
+    case UPDATE_EMPLOYEE_ROLE:
       console.log('Updating employee role ...');
       //TODO: ensure function returns true/false
       await updateEmployeeRole();
