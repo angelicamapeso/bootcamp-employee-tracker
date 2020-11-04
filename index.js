@@ -1,7 +1,7 @@
 const mysql = require('mysql2/promise');
 const consoleTable = require('console.table');
 
-const connectionDetails = require('./assets/connectionDetails.js');
+const connectionDetails = require('./assets/constants/connectionDetails.js');
 const prompts = require('./assets/prompts.js');
 const TableController = require('./assets/TableController.js');
 
