@@ -1,15 +1,24 @@
+//Dependencies
 const mysql = require('mysql2/promise');
 const consoleTable = require('console.table');
 
+//Holds connection details for connection to database
 const connectionDetails = require('./assets/constants/connectionDetails.js');
+//All program prompts
 const prompts = require('./assets/prompts.js');
-
+//Used for retrieving choices used in main menu
 const mainMenuChoices = require('./assets/constants/mainMenuChoices.js');
 
+//Database connection variable
 let connection;
+
+//Access to table controller objects
+//Split into seperate files for custom queries
 const departmentTable = require('./assets/tableControllers/departmentController.js')
 const roleTable = require('./assets/tableControllers/roleController.js');
 const employeeTable = require('./assets/tableControllers/employeeController.js');
+
+//Runs application
 main();
 
 //TODO: move database functions to separate file
@@ -26,6 +35,7 @@ async function main() {
   }
 }
 
+//----- CONNECTING TO DATABASE AND INITIALIZING CONNECTION FOR TABLES -----//
 async function connect() {
   connection = await mysql.createConnection(connectionDetails);
   departmentTable.setConnection(connection);
@@ -34,9 +44,11 @@ async function connect() {
   console.log(`Connected with id: ${connection.threadId}`);
 }
 
+//----- EXECUTOR -----//
 async function runApp() {
   const action = await prompts.mainMenu();
 
+  //Deconstructing main menu choices
   const [ADD_DEPARTMENT, VIEW_DEPARTMENTS] = mainMenuChoices.departmentActions;
   const [ADD_ROLE, VIEW_ROLES] = mainMenuChoices.roleActions;
   const [ADD_EMPLOYEE, VIEW_EMPLOYEES, UPDATE_EMPLOYEE_ROLE] = mainMenuChoices.employeeActions;
@@ -82,6 +94,7 @@ async function runApp() {
   }
 }
 
+//----- ACTIONS-----//
 async function addDepartment() {
   const departmentInfo = await prompts.askDepartmentInfo();
   await departmentTable.insert(departmentInfo);
