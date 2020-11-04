@@ -56,6 +56,7 @@ async function runApp() {
   const QUIT = mainMenuChoices.quit;
 
   switch(action) {
+    // ---- Department Actions ---- //
     case ADD_DEPARTMENT:
       console.log('Adding department ...');
       await addDepartment();
@@ -64,6 +65,7 @@ async function runApp() {
       console.log('Viewing departments ...');
       await viewDepartments();
       return true;
+    // ---- Role Actions ---- //
     case ADD_ROLE:
       console.log('Adding roles ...');
       await addRole();
@@ -72,6 +74,7 @@ async function runApp() {
       console.log('Viewing roles ...');
       await viewRoles();
       return true;
+    // ---- Employee Actions ---- //
     case ADD_EMPLOYEE:
       console.log('Adding employees ...');
       await addEmployee();
@@ -84,6 +87,7 @@ async function runApp() {
       console.log('Updating employee role ...');
       await updateEmployeeRole();
       return true;
+    // ---- Quit ---- //
     case QUIT:
       console.log('Goodbye!');
       return false;
