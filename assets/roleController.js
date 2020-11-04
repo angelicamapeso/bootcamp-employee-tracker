@@ -3,14 +3,14 @@ const mysql = require('mysql2/promise');
 
 const roleController = new TableController('role');
 
-roleController.selectWithAlias = async function(departmentName) {
+roleController.selectWithAlias = async function(departmentTableName) {
   try {
     this.checkConnection();
     const aliasQuery = `
-    SELECT ${this.name}.id AS ID, ${this.name}.title AS Title, 
-      ${this.name}.salary AS Salary, ${departmentName}.name AS Department
+    SELECT ${this.name}.id AS ID, ${this.name}.title AS Title,
+      ${this.name}.salary AS Salary, ${departmentTableName}.name AS Department
     FROM ${this.name}
-    LEFT JOIN ${departmentName} ON ${this.name}.department_id = ${departmentName}.id`;
+    LEFT JOIN ${departmentTableName} ON ${this.name}.department_id = ${departmentTableName}.id`;
     const [roles] = await this.connection.query(aliasQuery);
     return roles;
   } catch(error) {
