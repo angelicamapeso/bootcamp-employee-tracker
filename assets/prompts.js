@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 const mainMenuChoices = require('./constants/mainMenuChoices.js');
 
 const [DEPARTMENT_TABLE, ROLE_TABLE, EMPLOYEE_TABLE] = mainMenuChoices.tables;
-
+const QUIT = mainMenuChoices.quit;
 
 //Main Menu
 async function mainMenu() {
@@ -16,31 +16,31 @@ async function mainMenu() {
       type: 'list',
       name: 'table',
       message: 'Which would you like to modify?',
-      choices: [...mainMenuChoices.tables],
+      choices: [...mainMenuChoices.tables, QUIT],
     },
     {
       type: 'list',
       name: 'action',
       message: `What would you like to do with ${DEPARTMENT_TABLE}?`,
-      choices: [...mainMenuChoices.departmentActions],
+      choices: [...mainMenuChoices.departmentActions, QUIT],
       when: currentAnswers => currentAnswers.table === DEPARTMENT_TABLE,
     },
     {
       type: 'list',
       name: 'action',
       message: `What would you like to do with ${ROLE_TABLE}?`,
-      choices: [...mainMenuChoices.roleActions],
+      choices: [...mainMenuChoices.roleActions, QUIT],
       when: currentAnswers => currentAnswers.table === ROLE_TABLE,
     },
     {
       type: 'list',
       name: 'action',
       message: `What would you like to do with ${EMPLOYEE_TABLE}?`,
-      choices: [...mainMenuChoices.employeeActions],
+      choices: [...mainMenuChoices.employeeActions, QUIT],
       when: currentAnswers => currentAnswers.table === EMPLOYEE_TABLE,
     },
   ]);
-  return mainMenuChoice.action;
+  return mainMenuChoice.table === QUIT ? mainMenuChoice.table : mainMenuChoice.action;
 }
 
 //Use when creating new department

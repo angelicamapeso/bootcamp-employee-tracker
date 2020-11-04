@@ -53,6 +53,7 @@ async function runApp() {
   const [ADD_DEPARTMENT, VIEW_DEPARTMENTS] = mainMenuChoices.departmentActions;
   const [ADD_ROLE, VIEW_ROLES] = mainMenuChoices.roleActions;
   const [ADD_EMPLOYEE, VIEW_EMPLOYEES, UPDATE_EMPLOYEE_ROLE] = mainMenuChoices.employeeActions;
+  const QUIT = mainMenuChoices.quit;
 
   switch(action) {
     case ADD_DEPARTMENT:
@@ -90,6 +91,9 @@ async function runApp() {
       //TODO: ensure function returns true/false
       await updateEmployeeRole();
       return true;
+    case QUIT:
+      console.log('Goodbye!');
+      return false;
     default:
       throw new Error('Invalid main menu action.');
   }
