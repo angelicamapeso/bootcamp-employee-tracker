@@ -89,7 +89,7 @@ async function addDepartment() {
   console.log('\n>----- ADD DEPARTMENT ----->');
   const departmentInfo = await prompts.askDepartmentInfo();
   await departmentTable.insert(departmentInfo);
-  console.log('Department added successfully!');
+  console.log(`Department '${departmentInfo.name}' added successfully!`);
   return true;
 }
 
