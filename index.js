@@ -21,8 +21,6 @@ const employeeTable = require('./assets/tableControllers/employeeController.js')
 //Runs application
 main();
 
-//TODO: move database functions to separate file
-
 async function main() {
   try {
     //TODO: add loop to keep asking for menu prompts
