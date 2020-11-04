@@ -8,7 +8,7 @@ const TableController = require('./assets/TableController.js');
 let connection;
 const departmentTable = require('./assets/departmentController.js')
 const roleTable = require('./assets/roleController.js');
-const employeeTable = new TableController('employee');
+const employeeTable = require('./assets/employeeController.js');
 main();
 
 //TODO: move database functions to separate file
