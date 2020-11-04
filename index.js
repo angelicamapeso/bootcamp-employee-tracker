@@ -3,12 +3,12 @@ const consoleTable = require('console.table');
 
 const connectionDetails = require('./assets/constants/connectionDetails.js');
 const prompts = require('./assets/prompts.js');
-const TableController = require('./assets/TableController.js');
+const TableController = require('./assets/tableControllers/TableController.js');
 
 let connection;
-const departmentTable = require('./assets/departmentController.js')
-const roleTable = require('./assets/roleController.js');
-const employeeTable = require('./assets/employeeController.js');
+const departmentTable = require('./assets/tableControllers/departmentController.js')
+const roleTable = require('./assets/tableControllers/roleController.js');
+const employeeTable = require('./assets/tableControllers/employeeController.js');
 main();
 
 //TODO: move database functions to separate file
