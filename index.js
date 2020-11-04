@@ -105,7 +105,7 @@ async function addRole() {
   const departments = await departmentTable.selectAll();
   const roleInfo = await prompts.askRoleInfo(departments);
   await roleTable.insert(roleInfo);
-  console.log('Role successfully added!');
+  console.log(`Role '${roleInfo.title}' added successfully!`);
   return true;
 }
 
