@@ -4,7 +4,7 @@ const consoleTable = require('console.table');
 const connectionDetails = require('./assets/connectionDetails.js');
 const prompts = require('./assets/prompts.js');
 const TableController = require('./assets/TableController.js');
-const Field = require('./assets/Field.js');
+const FieldFormatter = require('./assets/FieldFormatter.js');
 
 let connection;
 const departmentTable = new TableController('department');
@@ -85,8 +85,8 @@ async function addDepartment() {
 
 async function viewDepartments() {
   const departments = await departmentTable.selectFields([
-    new Field('id').setAlias('ID'),
-    new Field('name').setAlias('Department Name'),
+    new FieldFormatter('id').setAlias('ID'),
+    new FieldFormatter('name').setAlias('Department Name'),
   ]);
   console.table(departments);
 }
@@ -101,15 +101,15 @@ async function addRole() {
 async function viewRoles() {
   const roles = await roleTable.leftJoin({
     selectFields: [
-      new Field('id', roleTable.name).setAlias('ID'),
-      new Field('title', roleTable.name).setAlias('Title'),
-      new Field('salary', roleTable.name).setAlias('Salary'),
-      new Field('name', departmentTable.name).setAlias('Department'),
+      new FieldFormatter('id', roleTable.name).setAlias('ID'),
+      new FieldFormatter('title', roleTable.name).setAlias('Title'),
+      new FieldFormatter('salary', roleTable.name).setAlias('Salary'),
+      new FieldFormatter('name', departmentTable.name).setAlias('Department'),
     ],
     joins: [
       {
-        left: new Field('department_id', roleTable.name),
-        right: new Field('id', departmentTable.name),
+        left: new FieldFormatter('department_id', roleTable.name),
+        right: new FieldFormatter('id', departmentTable.name),
       }
     ]
   });
@@ -121,24 +121,24 @@ async function viewEmployees() {
   const managerAlias = 'm';
   const employees = await employeeTable.leftJoin({
     selectFields: [
-      new Field('id', employeeTable.name, employeeAlias).setAlias('ID'),
-      new Field('employeeName').setCustom(`
+      new FieldFormatter('id', employeeTable.name, employeeAlias).setAlias('ID'),
+      new FieldFormatter('employeeName').setCustom(`
         CONCAT(${mysql.escapeId(employeeAlias)}.${mysql.escapeId('first_name')}, ' ',
         ${mysql.escapeId(employeeAlias)}.${mysql.escapeId('last_name')})`)
           .setAlias('Employee'),
-      new Field('title', roleTable.name).setAlias('Role'),
-      new Field('managerName').setCustom(`CONCAT(${mysql.escapeId(managerAlias)}.${mysql.escapeId('first_name')}, ' ',
+      new FieldFormatter('title', roleTable.name).setAlias('Role'),
+      new FieldFormatter('managerName').setCustom(`CONCAT(${mysql.escapeId(managerAlias)}.${mysql.escapeId('first_name')}, ' ',
         ${mysql.escapeId(managerAlias)}.${mysql.escapeId('last_name')})`)
           .setAlias('Manager'),
     ],
     joins: [
       {
-        left: new Field('manager_id', employeeTable.name, employeeAlias),
-        right: new Field('id', employeeTable.name, managerAlias),
+        left: new FieldFormatter('manager_id', employeeTable.name, employeeAlias),
+        right: new FieldFormatter('id', employeeTable.name, managerAlias),
       },
       {
-        left: new Field('role_id', employeeTable.name, employeeAlias),
-        right: new Field('id', roleTable.name),
+        left: new FieldFormatter('role_id', employeeTable.name, employeeAlias),
+        right: new FieldFormatter('id', roleTable.name),
       }
     ],
     leftAlias: mysql.escapeId(employeeAlias),
@@ -157,15 +157,15 @@ async function addEmployee() {
 async function updateEmployeeRole() {
   const employees = await employeeTable.leftJoin({
     selectFields: [
-      new Field('id', employeeTable.name),
-      new Field('first_name', employeeTable.name),
-      new Field('last_name', employeeTable.name),
-      new Field('title', roleTable.name)
+      new FieldFormatter('id', employeeTable.name),
+      new FieldFormatter('first_name', employeeTable.name),
+      new FieldFormatter('last_name', employeeTable.name),
+      new FieldFormatter('title', roleTable.name)
     ],
     joins: [
       {
-        left: new Field('role_id', employeeTable.name),
-        right: new Field('id', roleTable.name),
+        left: new FieldFormatter('role_id', employeeTable.name),
+        right: new FieldFormatter('id', roleTable.name),
       }
     ]
   });

@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-class Field {
+class FieldFormatter {
   constructor(fieldName, tableName, tableAlias) {
     this.fieldName = mysql.escapeId(fieldName);
     if (tableName) this.tableName = tableName;
@@ -8,17 +8,17 @@ class Field {
   }
 }
 
-Field.prototype.setCustom = function(custom) {
+FieldFormatter.prototype.setCustom = function(custom) {
   this.custom = custom;
   return this;
 }
 
-Field.prototype.setAlias = function(fieldAlias) {
+FieldFormatter.prototype.setAlias = function(fieldAlias) {
   this.fieldAlias = mysql.escape(fieldAlias);
   return this;
 }
 
-Field.prototype.formatFieldForQuery = function () {
+FieldFormatter.prototype.formatFieldForQuery = function () {
   return (this.custom ? this.custom
       :  this.tableAlias ? this.tableAlias + '.'
       : this.tableName ? this.tableName + '.'
@@ -27,4 +27,4 @@ Field.prototype.formatFieldForQuery = function () {
     + (this.fieldAlias ? ' AS ' + this.fieldAlias : '');
 }
 
-module.exports = Field;
+module.exports = FieldFormatter;

@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const Field = require('./Field.js');
+const FieldFormatter = require('./FieldFormatter.js');
 
 class TableController {
   constructor(name) {
