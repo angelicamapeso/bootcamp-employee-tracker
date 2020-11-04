@@ -1,8 +1,15 @@
+//All prompts used in program
+//Dependencies
 const inquirer = require('inquirer');
+
+//Since main menu choices are shared in prompts and index,
+//using constants to store choices in one place
 const mainMenuChoices = require('./constants/mainMenuChoices.js');
 
 const [DEPARTMENT_TABLE, ROLE_TABLE, EMPLOYEE_TABLE] = mainMenuChoices.tables;
 
+
+//Main Menu
 async function mainMenu() {
   const mainMenuChoice = await inquirer.prompt([
     {
@@ -36,6 +43,7 @@ async function mainMenu() {
   return mainMenuChoice.action;
 }
 
+//Use when creating new department
 async function askDepartmentInfo() {
   const departmentInfo = await inquirer.prompt([
     {
@@ -49,6 +57,8 @@ async function askDepartmentInfo() {
   return departmentInfo;
 }
 
+
+//Use when creating new role
 async function askRoleInfo(departments) {
   const roleInfo = await inquirer.prompt([
     {
@@ -89,6 +99,7 @@ async function askRoleInfo(departments) {
   return roleInfo;
 }
 
+//Use when creating new employee
 async function askEmployeeInfo(roles, employees) {
   const employeeInfo = await inquirer.prompt([
     {
@@ -125,6 +136,7 @@ async function askEmployeeInfo(roles, employees) {
   return employeeInfo;
 }
 
+//Use when updating employee's role
 async function askUpdateEmployeeRole(employees, roles) {
   const updateEmployeeRoleInfo = await inquirer.prompt([
     {
