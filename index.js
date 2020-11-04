@@ -23,7 +23,6 @@ init();
 
 async function init() {
   try {
-    //TODO: add loop to keep asking for menu prompts
     await connect();
     let canContinue = true;
     while (canContinue) {
