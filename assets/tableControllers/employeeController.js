@@ -22,4 +22,20 @@ employeeController.selectJoinManagerRole = async function(roleTableName) {
   }
 }
 
+employeeController.selectEmployeeRoles = async function(roleTableName) {
+  try {
+    this.checkConnection();
+    const joinQuery = `
+    SELECT ${this.name}.id,
+      CONCAT(${this.name}.first_name ,' ', ${this.name}.last_name) AS name,
+      ${roleTableName}.title
+    FROM ${this.name}
+    LEFT JOIN ${roleTableName} ON ${this.name}.role_id = ${roleTableName}.id
+    `;
+    const [employees] = await this.connection.query(joinQuery);
+    return employees;
+  } catch(error) {
+    console.error(error);
+  }
+}
 module.exports = employeeController;
