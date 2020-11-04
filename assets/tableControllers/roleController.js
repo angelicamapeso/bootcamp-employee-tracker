@@ -3,7 +3,7 @@ const TableController = require('./TableController.js');
 //For custom queries of table: role
 const roleController = new TableController('role');
 
-roleController.selectWithAlias = async function(departmentTableName) {
+roleController.selectJoinDepartment = async function(departmentTableName) {
   try {
     this.checkConnection();
     const aliasQuery = `

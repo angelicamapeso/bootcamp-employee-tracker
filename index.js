@@ -101,7 +101,7 @@ async function addRole() {
 }
 
 async function viewRoles() {
-  const roles = await roleTable.selectWithAlias(departmentTable.name);
+  const roles = await roleTable.selectJoinDepartment(departmentTable.name);
   console.table(roles);
 }
 
