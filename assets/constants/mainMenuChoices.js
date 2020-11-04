@@ -5,6 +5,7 @@ const mainMenuChoices = {
   departmentActions: ['Add department', 'View departments'],
   roleActions: ['Add role', 'View roles'],
   employeeActions: ['Add employee', 'View employees', 'Update employee role'],
+  quit: 'Quit',
 }
 
 module.exports = mainMenuChoices;
