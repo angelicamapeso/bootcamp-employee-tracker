@@ -101,7 +101,7 @@ async function addDepartment() {
 async function viewDepartments() {
   console.log('\n>----- VIEW DEPARTMENTS ----->\n');
   const departments = await departmentTable.selectWithAlias();
-  console.table('DEPARTMENTS',departments);
+  console.table('Departments',departments);
 }
 
 async function addRole() {
@@ -115,13 +115,13 @@ async function addRole() {
 async function viewRoles() {
   console.log('\n>----- VIEW ROLES ----->\n');
   const roles = await roleTable.selectJoinDepartment(departmentTable.name);
-  console.table('ROLES',roles);
+  console.table('Roles',roles);
 }
 
 async function viewEmployees() {
   console.log('\n>----- VIEW EMPLOYEES ----->\n');
   const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
-  console.table('EMPLOYEES',employees);
+  console.table('Employees',employees);
 }
 
 async function addEmployee() {
