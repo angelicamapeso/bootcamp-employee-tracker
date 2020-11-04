@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
+const mainMenuChoices = require('./constants/mainMenuChoices.js');
 
 async function mainMenu() {
-  const mainMenuChoices = await inquirer.prompt([
+  const mainMenuChoice = await inquirer.prompt([
     {
       type: 'list',
       name: 'table',
@@ -44,7 +45,7 @@ async function mainMenu() {
       when: currentAnswers => currentAnswers.table === 'Employees',
     },
   ]);
-  return mainMenuChoices.action;
+  return mainMenuChoice.action;
 }
 
 async function askDepartmentInfo() {
