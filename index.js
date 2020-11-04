@@ -116,7 +116,7 @@ async function addRole() {
 
 async function viewRoles() {
   const roles = await roleTable.selectJoinDepartment(departmentTable.name);
-  console.table(roles);
+  console.table('ROLES',roles);
 }
 
 async function viewEmployees() {
