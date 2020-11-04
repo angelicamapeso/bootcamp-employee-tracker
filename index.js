@@ -83,10 +83,7 @@ async function addDepartment() {
 }
 
 async function viewDepartments() {
-  const query = `
-    SELECT id AS ID, name as Department
-    FROM ${departmentTable.name}`;
-  const [departments] = await connection.query(query)
+  const departments = await departmentTable.selectWithAlias();
   console.table(departments);
 }
 
