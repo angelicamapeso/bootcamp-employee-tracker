@@ -5,6 +5,8 @@ const connectionDetails = require('./assets/constants/connectionDetails.js');
 const prompts = require('./assets/prompts.js');
 const TableController = require('./assets/tableControllers/TableController.js');
 
+const mainMenuChoices = require('./assets/constants/mainMenuChoices.js');
+
 let connection;
 const departmentTable = require('./assets/tableControllers/departmentController.js')
 const roleTable = require('./assets/tableControllers/roleController.js');
