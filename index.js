@@ -132,9 +132,7 @@ async function addEmployee() {
 }
 
 async function updateEmployeeRole() {
-  const [employees] = await connection.query(`
-  SELECT employee.id, employee.first_name, employee.last_name, role.title
-  FROM ${employeeTable.name} LEFT JOIN ${roleTable.name} ON employee.role_id = role.id`);
+  const employees = await employeeTable.selectEmployeeRoles(roleTable.name);
   const roles = await roleTable.selectAll();
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
   employeeTable.update({role_id}, {id});
