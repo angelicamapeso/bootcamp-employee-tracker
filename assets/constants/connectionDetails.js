@@ -1,3 +1,4 @@
+//Details for making connection to database
 const connectionDetails = {
   host: 'localhost',
   user: 'root',
