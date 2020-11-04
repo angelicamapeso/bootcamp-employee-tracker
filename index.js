@@ -24,6 +24,7 @@ init();
 async function init() {
   try {
     await connect();
+    console.log('\nWelcome to the Employee Database Manager!');
     let canContinue = true;
     while (canContinue) {
       canContinue = await runApp();
