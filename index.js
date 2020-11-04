@@ -124,7 +124,7 @@ async function addEmployee() {
   const roles = await roleTable.selectAll();
   const employees = await employeeTable.selectAll();
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
-  await connection.query('INSERT INTO employee SET ?', employeeInfo);
+  await employeeTable.insert(employeeInfo);
   console.log('Employee successfully added!');
 }
 
