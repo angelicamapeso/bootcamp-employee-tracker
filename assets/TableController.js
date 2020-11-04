@@ -39,30 +39,6 @@ TableController.prototype.selectAll = async function() {
   }
 }
 
-TableController.prototype.getLeftJoinQuery = function({selectFields, joins, leftAlias}) {
-  const formattedSelectFields = selectFields.map(field => field.formatFieldForQuery());
-  let leftJoinQuery = `
-    SELECT ${formattedSelectFields.join(',')}
-    FROM ${this.name} ${leftAlias ? leftAlias : ''}`;
-  joins.forEach(function(join){
-    leftJoinQuery += `
-      LEFT JOIN ${join.right.tableName} ${join.right.tableAlias ? join.right.tableAlias : ''}
-      ON ${join.left.formatFieldForQuery()} = ${join.right.formatFieldForQuery()}`;
-  });
-  return leftJoinQuery;
-}
-
-TableController.prototype.leftJoin = async function(joinInfo) {
-  try {
-    const leftJoinQuery = this.getLeftJoinQuery(joinInfo);
-    this.checkConnection();
-    const [data] = await this.connection.query(leftJoinQuery);
-    return data;
-  } catch(error) {
-    console.error(error);
-  }
-}
-
 TableController.prototype.update = async function(set, identifier) {
   try {
     const updateQuery = `

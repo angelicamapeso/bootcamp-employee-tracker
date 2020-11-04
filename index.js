@@ -99,50 +99,25 @@ async function addRole() {
 }
 
 async function viewRoles() {
-  const roles = await roleTable.leftJoin({
-    selectFields: [
-      new FieldFormatter('id', roleTable.name).setAlias('ID'),
-      new FieldFormatter('title', roleTable.name).setAlias('Title'),
-      new FieldFormatter('salary', roleTable.name).setAlias('Salary'),
-      new FieldFormatter('name', departmentTable.name).setAlias('Department'),
-    ],
-    joins: [
-      {
-        left: new FieldFormatter('department_id', roleTable.name),
-        right: new FieldFormatter('id', departmentTable.name),
-      }
-    ]
-  });
+  const query = `
+  SELECT role.id AS ID, role.title AS Title, role.salary AS Salary
+  FROM ${roleTable.name}
+  LEFT JOIN ${departmentTable.name} ON role.department_id = department.id`
+  const [roles] = await connection.query(query);
   console.table(roles);
 }
 
 async function viewEmployees() {
-  const employeeAlias = 'e';
-  const managerAlias = 'm';
-  const employees = await employeeTable.leftJoin({
-    selectFields: [
-      new FieldFormatter('id', employeeTable.name, employeeAlias).setAlias('ID'),
-      new FieldFormatter('employeeName').setCustom(`
-        CONCAT(${mysql.escapeId(employeeAlias)}.${mysql.escapeId('first_name')}, ' ',
-        ${mysql.escapeId(employeeAlias)}.${mysql.escapeId('last_name')})`)
-          .setAlias('Employee'),
-      new FieldFormatter('title', roleTable.name).setAlias('Role'),
-      new FieldFormatter('managerName').setCustom(`CONCAT(${mysql.escapeId(managerAlias)}.${mysql.escapeId('first_name')}, ' ',
-        ${mysql.escapeId(managerAlias)}.${mysql.escapeId('last_name')})`)
-          .setAlias('Manager'),
-    ],
-    joins: [
-      {
-        left: new FieldFormatter('manager_id', employeeTable.name, employeeAlias),
-        right: new FieldFormatter('id', employeeTable.name, managerAlias),
-      },
-      {
-        left: new FieldFormatter('role_id', employeeTable.name, employeeAlias),
-        right: new FieldFormatter('id', roleTable.name),
-      }
-    ],
-    leftAlias: mysql.escapeId(employeeAlias),
-  });
+  const query = `
+  SELECT e.id AS ID,
+    CONCAT(e.first_name ,' ', e.last_name) AS Employee,
+    role.title,
+    CONCAT(m.first_name,' ',m.last_name) AS Manager
+  FROM ${employeeTable.name} e
+  LEFT JOIN ${employeeTable.name} m ON e.manager_id = m.id
+  LEFT JOIN ${roleTable.name} ON e.role_id = role.id
+  `
+  const [employees] = await connection.query(query);
   console.table(employees);
 }
 
@@ -155,20 +130,9 @@ async function addEmployee() {
 }
 
 async function updateEmployeeRole() {
-  const employees = await employeeTable.leftJoin({
-    selectFields: [
-      new FieldFormatter('id', employeeTable.name),
-      new FieldFormatter('first_name', employeeTable.name),
-      new FieldFormatter('last_name', employeeTable.name),
-      new FieldFormatter('title', roleTable.name)
-    ],
-    joins: [
-      {
-        left: new FieldFormatter('role_id', employeeTable.name),
-        right: new FieldFormatter('id', roleTable.name),
-      }
-    ]
-  });
+  const [employees] = await connection.query(`
+  SELECT employee.id, employee.first_name, employee.last_name, role.title
+  FROM ${employeeTable.name} LEFT JOIN ${roleTable.name} ON employee.role_id = role.id`);
   const roles = await roleTable.selectAll();
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
   employeeTable.update({role_id}, {id});
