@@ -1,5 +1,6 @@
 const TableController = require('./TableController.js');
 
+//For custom queries of table: department
 const departmentController = new TableController('department');
 
 departmentController.selectWithAlias = async function() {
