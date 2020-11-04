@@ -3,7 +3,7 @@ const TableController = require('./TableController.js');
 //For custom queries of table: employee
 const employeeController = new TableController('employee');
 
-employeeController.selectWithAlias = async function(roleTableName) {
+employeeController.selectJoinManagerRole = async function(roleTableName) {
   try {
     this.checkConnection();
     const aliasQuery = `

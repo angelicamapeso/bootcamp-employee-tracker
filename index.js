@@ -106,7 +106,7 @@ async function viewRoles() {
 }
 
 async function viewEmployees() {
-  const employees = await employeeTable.selectWithAlias(roleTable.name);
+  const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
   console.table(employees);
 }
 
