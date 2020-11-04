@@ -9,7 +9,7 @@ employeeController.selectJoinManagerRole = async function(roleTableName) {
     const aliasQuery = `
     SELECT e.id AS ID,
       CONCAT(e.first_name ,' ', e.last_name) AS Employee,
-      ${roleTableName}.title,
+      ${roleTableName}.title AS Title,
       CONCAT(m.first_name,' ',m.last_name) AS Manager
     FROM ${this.name} e
     LEFT JOIN ${this.name} m ON e.manager_id = m.id
