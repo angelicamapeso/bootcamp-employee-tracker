@@ -1,5 +1,5 @@
 const TableController = require('./TableController.js');
-const mysql = require('mysql2/promise');
+// const mysql = require('mysql2/promise');
 
 const employeeController = new TableController('employee');
 
