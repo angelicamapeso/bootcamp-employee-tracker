@@ -129,7 +129,7 @@ async function addEmployee() {
   const employees = await employeeTable.selectAll();
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await employeeTable.insert(employeeInfo);
-  console.log('Employee successfully added!');
+  console.log(`Employee '${employeeInfo.first_name} ${employeeInfo.last_name}' added successfully!`);
   return true;
 }
 
