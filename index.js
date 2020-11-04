@@ -60,28 +60,21 @@ async function runApp() {
   switch(action) {
     // ---- Department Actions ---- //
     case ADD_DEPARTMENT:
-      await addDepartment();
-      return true;
+      return await addDepartment();
     case VIEW_DEPARTMENTS:
-      await viewDepartments();
-      return true;
+      return await viewDepartments();
     // ---- Role Actions ---- //
     case ADD_ROLE:
-      await addRole();
-      return true;
+      return await addRole();
     case VIEW_ROLES:
-      await viewRoles();
-      return true;
+      return await viewRoles();
     // ---- Employee Actions ---- //
     case ADD_EMPLOYEE:
-      await addEmployee();
-      return true;
+      return await addEmployee();
     case VIEW_EMPLOYEES:
-      await viewEmployees();
-      return true;
+      return await viewEmployees();
     case UPDATE_EMPLOYEE_ROLE:
-      await updateEmployeeRole();
-      return true;
+      return await updateEmployeeRole();
     // ---- Quit ---- //
     case QUIT:
       console.log('Goodbye!');
@@ -97,12 +90,14 @@ async function addDepartment() {
   const departmentInfo = await prompts.askDepartmentInfo();
   await departmentTable.insert(departmentInfo);
   console.log('Department added successfully!');
+  return true;
 }
 
 async function viewDepartments() {
   console.log('\n>----- VIEW DEPARTMENTS ----->\n');
   const departments = await departmentTable.selectWithAlias();
   console.table('Departments',departments);
+  return true;
 }
 
 async function addRole() {
@@ -111,18 +106,21 @@ async function addRole() {
   const roleInfo = await prompts.askRoleInfo(departments);
   await roleTable.insert(roleInfo);
   console.log('Role successfully added!');
+  return true;
 }
 
 async function viewRoles() {
   console.log('\n>----- VIEW ROLES ----->\n');
   const roles = await roleTable.selectJoinDepartment(departmentTable.name);
   console.table('Roles',roles);
+  return true;
 }
 
 async function viewEmployees() {
   console.log('\n>----- VIEW EMPLOYEES ----->\n');
   const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
   console.table('Employees',employees);
+  return true;
 }
 
 async function addEmployee() {
@@ -132,6 +130,7 @@ async function addEmployee() {
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await employeeTable.insert(employeeInfo);
   console.log('Employee successfully added!');
+  return true;
 }
 
 async function updateEmployeeRole() {
@@ -141,4 +140,5 @@ async function updateEmployeeRole() {
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
   await employeeTable.update({role_id}, {id});
   console.log('Successfully updated employee role!');
+  return true;
 }
