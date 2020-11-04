@@ -108,7 +108,7 @@ async function addRole() {
   console.log('\n>----- ADD ROLE ----->');
   const departments = await departmentTable.selectAll();
   const roleInfo = await prompts.askRoleInfo(departments);
-  roleTable.insert(roleInfo);
+  await roleTable.insert(roleInfo);
   console.log('Role successfully added!');
 }
 
@@ -138,6 +138,6 @@ async function updateEmployeeRole() {
   const employees = await employeeTable.selectEmployeeRoles(roleTable.name);
   const roles = await roleTable.selectAll();
   const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
-  employeeTable.update({role_id}, {id});
+  await employeeTable.update({role_id}, {id});
   console.log('Successfully updated employee role!');
 }
