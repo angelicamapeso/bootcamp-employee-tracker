@@ -13,6 +13,7 @@ departmentController.selectWithAlias = async function() {
     return departments;
   } catch(error) {
     console.error(error);
+    process.exit(1);
   }
 }
 

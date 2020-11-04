@@ -24,6 +24,7 @@ TableController.prototype.insert = async function(data) {
     await this.connection.query(insertQuery, data);
   } catch(error) {
     console.error(error);
+    process.exit(1);
   }
 }
 
@@ -36,6 +37,7 @@ TableController.prototype.selectAll = async function() {
     return data;
   } catch(error) {
     console.error(error);
+    process.exit(1);
   }
 }
 
@@ -49,6 +51,7 @@ TableController.prototype.update = async function(set, identifier) {
     await this.connection.query(updateQuery, [set, identifier]);
   } catch(error) {
     console.error(error);
+    process.exit(1);
   }
 }
 

@@ -31,6 +31,7 @@ async function init() {
     }
   } catch(err) {
     console.error(err);
+    process.exit(1);
   } finally {
     if (connection) connection.end();
   }

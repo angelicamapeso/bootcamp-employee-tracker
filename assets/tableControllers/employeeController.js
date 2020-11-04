@@ -19,6 +19,7 @@ employeeController.selectJoinManagerRole = async function(roleTableName) {
     return employees;
   } catch(error) {
     console.error(error);
+    process.exit(1);
   }
 }
 
@@ -36,6 +37,7 @@ employeeController.selectEmployeeRoles = async function(roleTableName) {
     return employees;
   } catch(error) {
     console.error(error);
+    process.exit(1);
   }
 }
 module.exports = employeeController;
