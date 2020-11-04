@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const mainMenuChoices = require('./constants/mainMenuChoices.js');
 
+const [DEPARTMENT_TABLE, ROLE_TABLE, EMPLOYEE_TABLE] = mainMenuChoices.tables;
+
 async function mainMenu() {
   const mainMenuChoice = await inquirer.prompt([
     {
