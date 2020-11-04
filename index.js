@@ -58,37 +58,30 @@ async function runApp() {
   switch(action) {
     case ADD_DEPARTMENT:
       console.log('Adding department ...');
-      //TODO: ensure function returns true/false
       await addDepartment();
       return true;
     case VIEW_DEPARTMENTS:
       console.log('Viewing departments ...');
-      //TODO: ensure function returns true/false
       await viewDepartments();
       return true;
     case ADD_ROLE:
       console.log('Adding roles ...');
-      //TODO: ensure function returns true/false
       await addRole();
       return true;
     case VIEW_ROLES:
       console.log('Viewing roles ...');
-      //TODO: ensure function returns true/false
       await viewRoles();
       return true;
     case ADD_EMPLOYEE:
       console.log('Adding employees ...');
-      //TODO: ensure function returns true/false
       await addEmployee();
       return true;
     case VIEW_EMPLOYEES:
       console.log('Viewing employees ...');
-      //TODO: ensure function returns true/false
       await viewEmployees();
       return true;
     case UPDATE_EMPLOYEE_ROLE:
       console.log('Updating employee role ...');
-      //TODO: ensure function returns true/false
       await updateEmployeeRole();
       return true;
     case QUIT:
