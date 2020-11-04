@@ -95,11 +95,7 @@ async function addRole() {
 }
 
 async function viewRoles() {
-  const query = `
-  SELECT role.id AS ID, role.title AS Title, role.salary AS Salary
-  FROM ${roleTable.name}
-  LEFT JOIN ${departmentTable.name} ON role.department_id = department.id`
-  const [roles] = await connection.query(query);
+  const roles = await roleTable.selectWithAlias(departmentTable.name);
   console.table(roles);
 }
 
