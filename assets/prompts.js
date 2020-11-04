@@ -9,42 +9,28 @@ async function mainMenu() {
       type: 'list',
       name: 'table',
       message: 'Which would you like to modify?',
-      choices: [
-        'Departments',
-        'Roles',
-        'Employees',
-      ],
+      choices: [...mainMenuChoices.tables],
     },
     {
       type: 'list',
       name: 'action',
-      message: 'What would you like to do with Departments?',
-      choices: [
-        'Add department',
-        'View departments',
-      ],
-      when: currentAnswers => currentAnswers.table === 'Departments',
+      message: `What would you like to do with ${DEPARTMENT_TABLE}?`,
+      choices: [...mainMenuChoices.departmentActions],
+      when: currentAnswers => currentAnswers.table === DEPARTMENT_TABLE,
     },
     {
       type: 'list',
       name: 'action',
-      message: 'What would you like to do with Roles?',
-      choices: [
-        'Add role',
-        'View roles',
-      ],
-      when: currentAnswers => currentAnswers.table === 'Roles',
+      message: `What would you like to do with ${ROLE_TABLE}?`,
+      choices: [...mainMenuChoices.roleActions],
+      when: currentAnswers => currentAnswers.table === ROLE_TABLE,
     },
     {
       type: 'list',
       name: 'action',
-      message: 'What would you like to do with Employees?',
-      choices: [
-        'Add employee',
-        'View employees',
-        'Update employee role'
-      ],
-      when: currentAnswers => currentAnswers.table === 'Employees',
+      message: `What would you like to do with ${EMPLOYEE_TABLE}?`,
+      choices: [...mainMenuChoices.employeeActions],
+      when: currentAnswers => currentAnswers.table === EMPLOYEE_TABLE,
     },
   ]);
   return mainMenuChoice.action;
