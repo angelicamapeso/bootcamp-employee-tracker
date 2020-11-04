@@ -100,16 +100,7 @@ async function viewRoles() {
 }
 
 async function viewEmployees() {
-  const query = `
-  SELECT e.id AS ID,
-    CONCAT(e.first_name ,' ', e.last_name) AS Employee,
-    role.title,
-    CONCAT(m.first_name,' ',m.last_name) AS Manager
-  FROM ${employeeTable.name} e
-  LEFT JOIN ${employeeTable.name} m ON e.manager_id = m.id
-  LEFT JOIN ${roleTable.name} ON e.role_id = role.id
-  `
-  const [employees] = await connection.query(query);
+  const employees = await employeeTable.selectWithAlias(roleTable.name);
   console.table(employees);
 }
 
