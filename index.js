@@ -36,6 +36,11 @@ async function connect() {
 
 async function runApp() {
   const action = await prompts.mainMenu();
+
+  const [ADD_DEPARTMENT, VIEW_DEPARTMENTS] = mainMenuChoices.departmentActions;
+  const [ADD_ROLE, VIEW_ROLES] = mainMenuChoices.roleActions;
+  const [ADD_EMPLOYEE, VIEW_EMPLOYEES, UPDATE_EMPLOYEE_ROLE] = mainMenuChoices.employeeActions;
+
   switch(action) {
     case 'Add department':
       console.log('Adding department ...');
