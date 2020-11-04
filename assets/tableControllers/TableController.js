@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise');
 
+//Base class for performing basic functions on tables
 class TableController {
   constructor(name) {
     this.name = mysql.escapeId(name);
