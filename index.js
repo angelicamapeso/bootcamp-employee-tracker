@@ -6,7 +6,7 @@ const prompts = require('./assets/prompts.js');
 const TableController = require('./assets/TableController.js');
 
 let connection;
-const departmentTable = new TableController('department');
+const departmentTable = require('./assets/departmentController.js')
 const roleTable = new TableController('role');
 const employeeTable = new TableController('employee');
 main();
