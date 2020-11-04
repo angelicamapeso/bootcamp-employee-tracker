@@ -42,11 +42,12 @@ async function connect() {
   departmentTable.setConnection(connection);
   roleTable.setConnection(connection);
   employeeTable.setConnection(connection);
-  console.log(`Connected with id: ${connection.threadId}`);
+  console.log(`[Connected to ${connectionDetails.database} with id: ${connection.threadId}]`);
 }
 
 //----- EXECUTOR -----//
 async function runApp() {
+  console.log('\n>>----- MAIN MENU ----->>');
   const action = await prompts.mainMenu();
 
   //Deconstructing main menu choices
