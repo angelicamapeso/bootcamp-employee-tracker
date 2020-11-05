@@ -193,6 +193,20 @@ prompts.askEmployeeInfo = async (roles, employees) => {
   return employeeInfo;
 }
 
+prompts.askManagerToView = async (managers) => {
+  const managerChoice = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'manager',
+      message: "Which manager's employees would you like to view?",
+      choices: () => managers.map(manager =>
+        ({name: manager.name, value: manager})
+      ),
+    }
+  ]);
+  return managerChoice.manager;
+}
+
 prompts.askDeleteEmployee = async (employees) => {
   const employeeChoice = await inquirer.prompt([
     {
