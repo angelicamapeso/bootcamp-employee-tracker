@@ -52,7 +52,7 @@ async function runApp() {
   const action = await prompts.mainMenu();
 
   //Deconstructing main menu choices
-  const [ADD_DEPARTMENT, VIEW_DEPARTMENTS] = mainMenuChoices.departmentActions;
+  const [ADD_DEPARTMENT, VIEW_DEPARTMENTS, DELETE_DEPARTMENT] = mainMenuChoices.departmentActions;
   const [ADD_ROLE, VIEW_ROLES] = mainMenuChoices.roleActions;
   const [ADD_EMPLOYEE, VIEW_EMPLOYEES, UPDATE_EMPLOYEE_ROLE] = mainMenuChoices.employeeActions;
   const QUIT = mainMenuChoices.quit;
