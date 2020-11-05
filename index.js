@@ -81,6 +81,8 @@ async function runApp() {
       return await deleteEmployee();
     case UPDATE_EMPLOYEE_ROLE:
       return await updateEmployeeRole();
+    case UPDATE_EMPLOYEE_MANAGER:
+      return updateEmployeeManager();
     // ---- Quit ---- //
     case QUIT:
       console.log('Goodbye!');
@@ -176,5 +178,14 @@ async function updateEmployeeRole() {
   const {employeeToUpdate, newRole} = await prompts.askUpdateEmployeeRole(employees, roles);
   await employeeTable.update({role_id: newRole.id}, {id: employeeToUpdate.id});
   console.log(`Employee '${employeeToUpdate.name}' role updated successfully to '${newRole.title}'!`);
+  return true;
+}
+
+async function updateEmployeeManager() {
+  console.log('\n>----- UPDATE EMPLOYEE MANAGER ----->');
+  const employees = await employeeTable.selectEmployeeManagers();
+  const {employeeToUpdate, newManager} = await prompts.askUpdateEmployeeManager(employees);
+  await employeeTable.update({manager_id: newManager.id}, {id: employeeToUpdate.id});
+  console.log(`Employee '${employeeToUpdate.name}' manager updated successfully to '${newManager.name}'!`);
   return true;
 }
