@@ -70,6 +70,8 @@ async function runApp() {
       return await addRole();
     case VIEW_ROLES:
       return await viewRoles();
+    case DELETE_ROLE:
+      return await deleteRole();
     // ---- Employee Actions ---- //
     case ADD_EMPLOYEE:
       return await addEmployee();
@@ -124,6 +126,15 @@ async function viewRoles() {
   console.log('\n>----- VIEW ROLES ----->\n');
   const roles = await roleTable.selectJoinDepartment(departmentTable.name);
   console.table('Roles',roles);
+  return true;
+}
+
+async function deleteRole() {
+  console.log('\n>----- DELETE ROLE ----->\n');
+  const roles = await roleTable.selectAll();
+  const id = await prompts.askDeleteRole(roles);
+  await roleTable.delete(id);
+  console.log(`Role '${roles.find(role => role.id === id).title}' deleted successfully!`);
   return true;
 }
 
