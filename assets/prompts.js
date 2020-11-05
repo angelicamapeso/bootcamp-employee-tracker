@@ -128,7 +128,7 @@ prompts.askRoleInfo = async (departments) => {
       name: 'department_id',
       message: 'What department does this role belong to?',
       choices: () => departments.map(department =>
-        { return {name: department.name, value: department.id} }
+        ({name: department.name, value: department.id})
       ),
     }
   ]);
@@ -178,7 +178,7 @@ prompts.askEmployeeInfo = async (roles, employees) => {
       name: 'role_id',
       message: 'What role does the employee have?',
       choices: () => roles.map(role =>
-        {return {name: role.title, value: role.id}}
+        ({name: role.title, value: role.id})
       ),
     },
     {
@@ -215,11 +215,10 @@ prompts.askUpdateEmployeeRole = async (employees, roles) => {
       name: 'id',
       message: "Which employee's role would you like to update?",
       choices: () => employees.map(employee =>
-        { return {
+        ({
           name: `${employee.name}, ${employee.title}`,
           value: employee.id,
-          }
-        }
+        })
       ),
     },
     {
@@ -228,7 +227,7 @@ prompts.askUpdateEmployeeRole = async (employees, roles) => {
       message: currentAnswers =>
         `What new role would you like to give ${employees.find(employee => employee.id === currentAnswers.id).name}?`,
       choices: () => roles.map(role =>
-        {return {name: role.title, value: role.id}}
+        ({name: role.title, value: role.id})
       ),
     },
   ]);
