@@ -59,4 +59,24 @@ employeeController.selectEmployeeManagers = async function() {
     process.exit(1);
   }
 }
+
+employeeController.selectManagers = async function() {
+  try {
+    this.checkConnection();
+    const joinQuery = `
+      SELECT
+        m.id,
+        CONCAT(m.first_name, ' ', m.last_name) AS name
+      FROM ${this.name} m
+      INNER JOIN ${this.name} e ON m.id = e.manager_id
+      GROUP BY m.id;
+    `;
+    const [managers] = await this.connection.query(joinQuery);
+    return managers;
+  } catch(error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
 module.exports = employeeController;
