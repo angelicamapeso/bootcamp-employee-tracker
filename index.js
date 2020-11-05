@@ -77,6 +77,8 @@ async function runApp() {
       return await addEmployee();
     case VIEW_EMPLOYEES:
       return await viewEmployees();
+    case DELETE_EMPLOYEE:
+      return await deleteEmployee();
     case UPDATE_EMPLOYEE_ROLE:
       return await updateEmployeeRole();
     // ---- Quit ---- //
@@ -155,6 +157,16 @@ async function addEmployee() {
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await employeeTable.insert(employeeInfo);
   console.log(`Employee '${employeeInfo.first_name} ${employeeInfo.last_name}' added successfully!`);
+  return true;
+}
+
+async function deleteEmployee() {
+  console.log('\n>----- DELETE EMPLOYEE ----->');
+  const employees = await employeeTable.selectAll();
+  const id = await prompts.askDeleteEmployee(employees);
+  await employeeTable.delete(id);
+  const employeeToDelete = employees.find(employee => employee.id === id);
+  console.log(`Employee '${employeeToDelete.first_name} ${employeeToDelete.last_name}' deleted successfully!`);
   return true;
 }
 
