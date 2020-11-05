@@ -132,6 +132,20 @@ async function askRoleInfo(departments) {
   return roleInfo;
 }
 
+async function askDeleteRole(roles) {
+  const roleChoice = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'id',
+      message: 'Which role would you like to delete?',
+      choices: () => roles.map(role =>
+        { return {name: role.title, value: role.id}}
+      ),
+    }
+  ]);
+  return roleChoice.id;
+}
+
 //------ EMPLOYEE PROMPTS -----//
 //Use when creating new employee
 async function askEmployeeInfo(roles, employees) {
@@ -211,4 +225,5 @@ module.exports = {
   askEmployeeInfo,
   askUpdateEmployeeRole,
   askDeleteDepartment,
+  askDeleteRole,
 };
