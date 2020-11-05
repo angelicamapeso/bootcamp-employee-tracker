@@ -79,4 +79,24 @@ employeeController.selectManagers = async function() {
   }
 }
 
+employeeController.selectByManager = async function(roleTableName, managerId) {
+  try{
+    this.checkConnection();
+    const joinQuery = `
+      SELECT
+        ${this.name}.id AS ID,
+        CONCAT(${this.name}.first_name, ' ', ${this.name}.last_name) AS Employee,
+        ${roleTableName}.title AS Title
+      FROM ${this.name}
+      LEFT JOIN ${roleTableName} ON ${this.name}.role_id = ${roleTableName}.id
+      WHERE ${this.name}.manager_id = ${managerId};
+    `;
+    const [employees] = await this.connection.query(joinQuery);
+    return employees;
+  } catch(error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
 module.exports = employeeController;
