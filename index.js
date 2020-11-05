@@ -89,6 +89,7 @@ async function runApp() {
 }
 
 //----- ACTIONS-----//
+//----- DEPARTMENT ACTIONS-----//
 async function addDepartment() {
   console.log('\n>----- ADD DEPARTMENT ----->');
   const departmentInfo = await prompts.askDepartmentInfo();
@@ -113,6 +114,7 @@ async function deleteDepartment() {
   return true;
 }
 
+//----- ROLE ACTIONS-----//
 async function addRole() {
   console.log('\n>----- ADD ROLE ----->');
   const departments = await departmentTable.selectAll();
@@ -138,6 +140,7 @@ async function deleteRole() {
   return true;
 }
 
+//----- EMPLOYEE ACTIONS-----//
 async function viewEmployees() {
   console.log('\n>----- VIEW EMPLOYEES ----->\n');
   const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
