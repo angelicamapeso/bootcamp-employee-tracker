@@ -93,6 +93,8 @@ async function askRoleInfo(departments) {
         if (salary) {
           if (salary < 0) {
             return 'Salary cannot be negative.';
+          } else if (salary > 99999999.99) {
+            return 'Salary is too large. (Max salary: 99999999.99)'
           } else {
             return true;
           }
