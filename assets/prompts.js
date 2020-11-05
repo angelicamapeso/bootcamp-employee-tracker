@@ -197,14 +197,14 @@ prompts.askDeleteEmployee = async (employees) => {
   const employeeChoice = await inquirer.prompt([
     {
       type: 'list',
-      name: 'id',
+      name: 'toDelete',
       message: 'Which employee would you like to delete?',
       choices: () => employees.map(employee =>
-        { return {name: employee.first_name + ' ' + employee.last_name, value: employee.id} }
+        ({name: employee.first_name + ' ' + employee.last_name, value: employee})
       ),
     }
   ]);
-  return employeeChoice.id;
+  return employeeChoice.toDelete;
 }
 
 //Use when updating employee's role

@@ -163,9 +163,8 @@ async function viewEmployees() {
 async function deleteEmployee() {
   console.log('\n>----- DELETE EMPLOYEE ----->');
   const employees = await employeeTable.selectAll();
-  const id = await prompts.askDeleteEmployee(employees);
-  await employeeTable.delete(id);
-  const employeeToDelete = employees.find(employee => employee.id === id);
+  const employeeToDelete = await prompts.askDeleteEmployee(employees);
+  await employeeTable.delete(employeeToDelete.id);
   console.log(`Employee '${employeeToDelete.first_name} ${employeeToDelete.last_name}' deleted successfully!`);
   return true;
 }
