@@ -81,14 +81,14 @@ prompts.askDeleteDepartment = async (departments) => {
   const departmentChoice = await inquirer.prompt([
     {
       type: 'list',
-      name: 'id',
+      name: 'toDelete',
       message: 'Which department would you like to delete?',
       choices: () => departments.map(department =>
-        { return {name: department.name, value: department.id} }
+        ({name: department.name, value: department})
       ),
     }
   ]);
-  return departmentChoice.id;
+  return departmentChoice.toDelete;
 }
 
 //------ ROLE PROMPTS -----//
