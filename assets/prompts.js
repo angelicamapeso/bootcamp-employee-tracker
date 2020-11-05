@@ -234,4 +234,36 @@ prompts.askUpdateEmployeeRole = async (employees, roles) => {
   return updateEmployeeRoleInfo;
 }
 
+prompts.askUpdateEmployeeManager = async (employees) => {
+  const updateEmployeeManagerInfo = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'employeeToUpdate',
+      message: "Which employee's manager would you like to update?",
+      choices: () => employees.map(employee =>
+        ({
+          name: `${employee.name}, Manager: ${employee.manager}`,
+          value: employee,
+        })
+      ),
+    },
+    {
+      type: 'list',
+      name: 'newManager',
+      message: currentAnswers =>
+        `Which employee should be assigned as ${currentAnswers.employeeToUpdate.name}'s new manager?`,
+      choices: currentAnswers =>
+        //employees cannot set themselves as their own manager
+        employees.filter(employee => employee.id !== currentAnswers.employeeToUpdate.id)
+        .map(employee =>
+          ({
+            name: employee.name,
+            value: employee,
+          })
+        ),
+    },
+  ]);
+  return updateEmployeeManagerInfo;
+}
+
 module.exports = prompts;
