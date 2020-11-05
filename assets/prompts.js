@@ -139,14 +139,14 @@ prompts.askDeleteRole = async (roles) => {
   const roleChoice = await inquirer.prompt([
     {
       type: 'list',
-      name: 'id',
+      name: 'toDelete',
       message: 'Which role would you like to delete?',
       choices: () => roles.map(role =>
-        { return {name: role.title, value: role.id}}
+        { return {name: role.title, value: role}}
       ),
     }
   ]);
-  return roleChoice.id;
+  return roleChoice.toDelete;
 }
 
 //------ EMPLOYEE PROMPTS -----//

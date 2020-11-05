@@ -136,9 +136,9 @@ async function viewRoles() {
 async function deleteRole() {
   console.log('\n>----- DELETE ROLE ----->');
   const roles = await roleTable.selectAll();
-  const id = await prompts.askDeleteRole(roles);
-  await roleTable.delete(id);
-  console.log(`Role '${roles.find(role => role.id === id).title}' deleted successfully!`);
+  const roleToDelete = await prompts.askDeleteRole(roles);
+  await roleTable.delete(roleToDelete.id);
+  console.log(`Role '${roleToDelete.title}' deleted successfully!`);
   return true;
 }
 
