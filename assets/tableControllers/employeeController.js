@@ -99,6 +99,8 @@ employeeController.selectByManager = async function(roleTableName, managerId) {
   }
 }
 
+//function is here and not in department because salaries are summed for
+//all EMPLOYEES of a department
 employeeController.getUtilizedBudget = async function(roleTableName, departmentId) {
   try {
     this.checkConnection();
