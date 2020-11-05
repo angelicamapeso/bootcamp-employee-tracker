@@ -55,6 +55,7 @@ async function mainMenu() {
   return mainMenuChoice.table === QUIT ? mainMenuChoice.table : mainMenuChoice.action;
 }
 
+//----- DEPARTMENT PROMPTS -----//
 //Use when creating new department
 async function askDepartmentInfo() {
   const departmentInfo = await inquirer.prompt([
@@ -131,6 +132,7 @@ async function askRoleInfo(departments) {
   return roleInfo;
 }
 
+//------ EMPLOYEE PROMPTS -----//
 //Use when creating new employee
 async function askEmployeeInfo(roles, employees) {
   const employeeInfo = await inquirer.prompt([
