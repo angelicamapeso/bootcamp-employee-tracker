@@ -54,7 +54,11 @@ async function runApp() {
   //Deconstructing main menu choices
   const [ADD_DEPARTMENT, VIEW_DEPARTMENTS, DELETE_DEPARTMENT] = mainMenuChoices.departmentActions;
   const [ADD_ROLE, VIEW_ROLES, DELETE_ROLE] = mainMenuChoices.roleActions;
-  const [ADD_EMPLOYEE, VIEW_EMPLOYEES, DELETE_EMPLOYEE, UPDATE_EMPLOYEE_ROLE, UPDATE_EMPLOYEE_MANAGER] = mainMenuChoices.employeeActions;
+  const [ADD_EMPLOYEE,
+      VIEW_EMPLOYEES, VIEW_EMPLOYEES_BY_MANAGER,
+      DELETE_EMPLOYEE,
+      UPDATE_EMPLOYEE_ROLE, UPDATE_EMPLOYEE_MANAGER
+    ] = mainMenuChoices.employeeActions;
   const QUIT = mainMenuChoices.quit;
 
   switch(action) {

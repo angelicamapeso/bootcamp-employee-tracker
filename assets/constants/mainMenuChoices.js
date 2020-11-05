@@ -4,7 +4,7 @@ const mainMenuChoices = {
   tables: ['Departments', 'Roles', 'Employees'],
   departmentActions: ['Add department', 'View departments', 'Delete department'],
   roleActions: ['Add role', 'View roles', 'Delete role'],
-  employeeActions: ['Add employee', 'View employees', 'Delete employee', 'Update employee role', 'Update employee manager'],
+  employeeActions: ['Add employee', 'View employees', 'View employees by manager','Delete employee', 'Update employee role', 'Update employee manager'],
   quit: 'Quit',
 }
 
