@@ -212,22 +212,22 @@ prompts.askUpdateEmployeeRole = async (employees, roles) => {
   const updateEmployeeRoleInfo = await inquirer.prompt([
     {
       type: 'list',
-      name: 'id',
+      name: 'employeeToUpdate',
       message: "Which employee's role would you like to update?",
       choices: () => employees.map(employee =>
         ({
           name: `${employee.name}, ${employee.title}`,
-          value: employee.id,
+          value: employee,
         })
       ),
     },
     {
       type: 'list',
-      name: 'role_id',
+      name: 'newRole',
       message: currentAnswers =>
-        `What new role would you like to give ${employees.find(employee => employee.id === currentAnswers.id).name}?`,
+        `What new role would you like to give ${currentAnswers.employeeToUpdate.name}?`,
       choices: () => roles.map(role =>
-        ({name: role.title, value: role.id})
+        ({name: role.title, value: role})
       ),
     },
   ]);

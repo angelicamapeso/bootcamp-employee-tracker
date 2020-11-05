@@ -173,8 +173,8 @@ async function updateEmployeeRole() {
   console.log('\n>----- UPDATE EMPLOYEE ROLE ----->');
   const employees = await employeeTable.selectEmployeeRoles(roleTable.name);
   const roles = await roleTable.selectAll();
-  const {id, role_id} = await prompts.askUpdateEmployeeRole(employees, roles);
-  await employeeTable.update({role_id}, {id});
-  console.log(`Employee '${employees.find(employee => employee.id === id).name}' role updated successfully to '${roles.find(role => role.id === role_id).title}'!`);
+  const {employeeToUpdate, newRole} = await prompts.askUpdateEmployeeRole(employees, roles);
+  await employeeTable.update({role_id: newRole.id}, {id: employeeToUpdate.id});
+  console.log(`Employee '${employeeToUpdate.name}' role updated successfully to '${newRole.title}'!`);
   return true;
 }
