@@ -3,17 +3,20 @@ const TableController = require('./TableController.js');
 //For custom queries of table: employee
 const employeeController = new TableController('employee');
 
-employeeController.selectJoinManagerRole = async function(roleTableName) {
+employeeController.selectJoinManagerRole = async function(roleTableName, departmentTableName) {
   try {
     this.checkConnection();
     const joinQuery = `
     SELECT e.id AS ID,
       CONCAT(e.first_name ,' ', e.last_name) AS Employee,
       ${roleTableName}.title AS Title,
-      CONCAT(m.first_name,' ',m.last_name) AS Manager
+      ${roleTableName}.salary AS Salary,
+      CONCAT(m.first_name,' ',m.last_name) AS Manager,
+      ${departmentTableName}.name AS Department
     FROM ${this.name} e
     LEFT JOIN ${this.name} m ON e.manager_id = m.id
     LEFT JOIN ${roleTableName} ON e.role_id = ${roleTableName}.id
+    LEFT JOIN ${departmentTableName} ON ${roleTableName}.department_id = ${departmentTableName}.id
     `
     const [employees] = await this.connection.query(joinQuery);
     return employees;

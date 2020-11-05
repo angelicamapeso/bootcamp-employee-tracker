@@ -174,7 +174,7 @@ async function addEmployee() {
 
 async function viewEmployees() {
   console.log('\n>----- VIEW EMPLOYEES ----->\n');
-  const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
+  const employees = await employeeTable.selectJoinManagerRole(roleTable.name, departmentTable.name);
   console.table('Employees',employees);
   return true;
 }
