@@ -123,7 +123,10 @@ async function askEmployeeInfo(roles, employees) {
       type: 'input',
       name: 'first_name',
       message: 'What is the first name of the employee?',
-      validate: (name) => name ? true : 'First name cannot be empty!',
+      validate: (name) =>
+        !name ? 'First name cannot be empty!'
+        : name.length > 30 ? 'First name is too long. (Max length: 30 characters)'
+        : true,
       filter: name => name.trim(),
     },
     {
