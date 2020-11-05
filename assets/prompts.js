@@ -133,7 +133,10 @@ async function askEmployeeInfo(roles, employees) {
       type: 'input',
       name: 'last_name',
       message: 'What is the last name of the employee?',
-      validate: (name) => name ? true : 'Last name cannot be empty!',
+      validate: (name) =>
+        !name ? 'Last name cannot be empty!'
+        : name.length > 30 ? 'Last name is too long. (Max length: 30 characters)'
+        : true,
       filter: name => name.trim(),
     },
     {
