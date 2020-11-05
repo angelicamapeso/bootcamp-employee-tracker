@@ -67,6 +67,8 @@ async function runApp() {
       return await addDepartment();
     case VIEW_DEPARTMENTS:
       return await viewDepartments();
+    case VIEW_UTILIZED_BUDGET:
+      return await viewUtilizedBudget();
     case DELETE_DEPARTMENT:
       return await deleteDepartment();
     // ---- Role Actions ---- //
@@ -112,6 +114,15 @@ async function viewDepartments() {
   console.log('\n>----- VIEW DEPARTMENTS ----->\n');
   const departments = await departmentTable.selectWithAlias();
   console.table('Departments',departments);
+  return true;
+}
+
+async function viewUtilizedBudget() {
+  console.log('\n>----- VIEW UTILIZED BUDGET OF A DEPARTMENT ----->');
+  const departments = await departmentTable.selectAll();
+  const departmentToView = await prompts.askDepartmentBudgetToView(departments);
+  const budget = await employeeTable.getUtilizedBudget(roleTable.name, departmentToView.id);
+  console.log(`The total utilized budget for '${departmentToView.name}' is $${budget === null ? '0.00' : budget}.`);
   return true;
 }
 
