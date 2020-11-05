@@ -76,6 +76,20 @@ prompts.askDepartmentInfo = async () => {
   return departmentInfo;
 }
 
+prompts.askDepartmentBudgetToView = async (departments) => {
+  const departmentChoice = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'toView',
+      message: "Which department's utilized budget would you like to view?",
+      choices: () => departments.map(department =>
+        ({name: department.name, value: department})
+      ),
+    }
+  ]);
+  return departmentChoice.toView;
+}
+
 //Use when deleting department
 prompts.askDeleteDepartment = async (departments) => {
   const departmentChoice = await inquirer.prompt([
