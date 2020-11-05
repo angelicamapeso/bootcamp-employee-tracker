@@ -142,7 +142,7 @@ prompts.askDeleteRole = async (roles) => {
       name: 'toDelete',
       message: 'Which role would you like to delete?',
       choices: () => roles.map(role =>
-        { return {name: role.title, value: role}}
+        ({name: role.title, value: role})
       ),
     }
   ]);
