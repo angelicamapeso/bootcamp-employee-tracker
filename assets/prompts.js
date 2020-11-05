@@ -177,7 +177,8 @@ async function askUpdateEmployeeRole(employees, roles) {
     {
       type: 'list',
       name: 'role_id',
-      message: 'What role would you like to give the employee?',
+      message: currentAnswers =>
+        `What new role would you like to give ${employees.find(employee => employee.id === currentAnswers.id).name}?`,
       choices: () => roles.map(role =>
         {return {name: role.title, value: role.id}}
       ),
