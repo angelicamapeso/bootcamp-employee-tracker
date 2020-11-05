@@ -72,7 +72,22 @@ async function askDepartmentInfo() {
   return departmentInfo;
 }
 
+//Use when deleting department
+async function askDeleteDepartment(departments) {
+  const departmentChoice = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'id',
+      message: 'Which department would you like to delete?',
+      choices: () => departments.map(department =>
+        { return {name: department.name, value: department.id} }
+      ),
+    }
+  ]);
+  return departmentChoice.id;
+}
 
+//------ ROLE PROMPTS -----//
 //Use when creating new role
 async function askRoleInfo(departments) {
   const roleInfo = await inquirer.prompt([
@@ -193,4 +208,5 @@ module.exports = {
   askRoleInfo,
   askEmployeeInfo,
   askUpdateEmployeeRole,
+  askDeleteDepartment,
 };

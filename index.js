@@ -104,6 +104,8 @@ async function viewDepartments() {
 
 async function deleteDepartment() {
   console.log('\n>----- DELETE DEPARTMENT ----->\n');
+  const departments = await departmentTable.selectAll();
+  const id = await prompts.askDeleteDepartment(departments);
 }
 
 async function addRole() {
