@@ -55,4 +55,18 @@ TableController.prototype.update = async function(set, identifier) {
   }
 }
 
+TableController.prototype.delete = async function(id) {
+  try {
+    const deleteQuery = `
+      DELETE FROM ${this.name}
+      WHERE ?
+    `;
+    this.checkConnection();
+    await this.connection.query(deleteQuery, {id});
+  } catch(error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
 module.exports = TableController;

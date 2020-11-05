@@ -106,6 +106,9 @@ async function deleteDepartment() {
   console.log('\n>----- DELETE DEPARTMENT ----->\n');
   const departments = await departmentTable.selectAll();
   const id = await prompts.askDeleteDepartment(departments);
+  await departmentTable.delete(id);
+  console.log(`Department '${departments.find(department => department.id === id).name}' deleted successfully!`);
+  return true;
 }
 
 async function addRole() {
