@@ -81,6 +81,8 @@ async function runApp() {
       return await addEmployee();
     case VIEW_EMPLOYEES:
       return await viewEmployees();
+    case VIEW_EMPLOYEES_BY_MANAGER:
+      return await viewEmployeesByManager();
     case DELETE_EMPLOYEE:
       return await deleteEmployee();
     case UPDATE_EMPLOYEE_ROLE:
@@ -165,6 +167,15 @@ async function viewEmployees() {
   console.table('Employees',employees);
   return true;
 }
+
+async function viewEmployeesByManager() {
+  console.log('\n>----- VIEW EMPLOYEES BY MANAGER ----->');
+  const managers = await employeeTable.selectManagers();
+  const managerToView = await prompts.askManagerToView(managers);
+  const employees = await employeeTable.selectByManager(roleTable.name, managerToView.id);
+  console.table(`\n${managerToView.name}'s Employees`, employees);
+  return true;
+};
 
 async function deleteEmployee() {
   console.log('\n>----- DELETE EMPLOYEE ----->');
