@@ -80,7 +80,9 @@ async function askRoleInfo(departments) {
       type: 'input',
       name: 'title',
       message: 'What is the title of the new role?',
-      validate: title => title ? true : 'Role title cannot be empty!',
+      validate: title => !title ? 'Role title cannot be empty!'
+        : title.length > 30 ? 'Role title is too long. (Max length: 30 characters)'
+        : true,
       filter: title => title.trim(),
     },
     {
