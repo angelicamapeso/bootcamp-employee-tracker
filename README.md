@@ -1,8 +1,17 @@
 # Bootcamp - Homework 10: Employee Tracker
 
+![Employee Tracker Preview](./img/employeeDB_preview.png)
+
+:link: [View the demo](https://drive.google.com/file/d/1qK6dDbHv2LevG-pKRqnFD16E_NHIn0Xr/view)
+
 A command line application to manage the Departments, Roles and Employees of a company.
 
+All information is stored, retrieved and modified using MySQL.
+
+A user story and acceptance criteria were provided for this assignment, but no starter code was given.
+
 ## Functions
+
 The following actions may be performed with the application:
 
 ### Add
@@ -19,11 +28,6 @@ The following actions may be performed with the application:
 
 ### Delete
 - Delete departments, roles and employees
-
-
-All information is stored, retrieved and modified using MySQL.
-
-A user story and acceptance criteria were provided for this assignment, but no starter code was given.
 
 ## Purpose
 According to the user story, this application is meant for business owners seeking to organize and plan their business by managing their company information.
