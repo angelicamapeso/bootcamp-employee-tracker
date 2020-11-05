@@ -63,6 +63,8 @@ async function runApp() {
       return await addDepartment();
     case VIEW_DEPARTMENTS:
       return await viewDepartments();
+    case DELETE_DEPARTMENT:
+      return await deleteDepartment();
     // ---- Role Actions ---- //
     case ADD_ROLE:
       return await addRole();
@@ -98,6 +100,10 @@ async function viewDepartments() {
   const departments = await departmentTable.selectWithAlias();
   console.table('Departments',departments);
   return true;
+}
+
+async function deleteDepartment() {
+  console.log('\n>----- DELETE DEPARTMENT ----->\n');
 }
 
 async function addRole() {
