@@ -62,7 +62,10 @@ async function askDepartmentInfo() {
       type: 'input',
       name: 'name',
       message: 'What is the name of the new department?',
-      validate: name => name ? true : 'Department name cannot be empty!',
+      validate: name =>
+        !name ? 'Department name cannot be empty!'
+        : name.length > 30 ? 'Department name is too long. (Max length: 30 characters)'
+        : true,
       filter: name => name.trim(),
     }
   ]);
