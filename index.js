@@ -143,13 +143,6 @@ async function deleteRole() {
 }
 
 //----- EMPLOYEE ACTIONS-----//
-async function viewEmployees() {
-  console.log('\n>----- VIEW EMPLOYEES ----->\n');
-  const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
-  console.table('Employees',employees);
-  return true;
-}
-
 async function addEmployee() {
   console.log('\n>----- ADD EMPLOYEE ----->');
   const roles = await roleTable.selectAll();
@@ -157,6 +150,13 @@ async function addEmployee() {
   const employeeInfo = await prompts.askEmployeeInfo(roles, employees);
   await employeeTable.insert(employeeInfo);
   console.log(`Employee '${employeeInfo.first_name} ${employeeInfo.last_name}' added successfully!`);
+  return true;
+}
+
+async function viewEmployees() {
+  console.log('\n>----- VIEW EMPLOYEES ----->\n');
+  const employees = await employeeTable.selectJoinManagerRole(roleTable.name);
+  console.table('Employees',employees);
   return true;
 }
 
