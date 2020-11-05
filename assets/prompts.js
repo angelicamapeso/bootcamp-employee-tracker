@@ -91,15 +91,13 @@ async function askRoleInfo(departments) {
       message: 'What is the salary of the new role?',
       validate: salary => {
         if (salary) {
-          if (isNaN(salary)) {
-            return 'Salary must be a number.';
-          } else if (salary < 0) {
+          if (salary < 0) {
             return 'Salary cannot be negative.';
           } else {
             return true;
           }
         } else {
-          return 'Salary cannot be empty!';
+          return 'Salary must be a number!';
         }
       },
       filter: salary => salary ? salary.toFixed(2) : '',
