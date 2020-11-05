@@ -1,9 +1,25 @@
 # Bootcamp - Homework 10: Employee Tracker
 
-A command line application to manage the Departments, Roles and Employees of a company. The following actions may be performed with the application:
+A command line application to manage the Departments, Roles and Employees of a company.
+
+## Functions
+The following actions may be performed with the application:
+
+### Add
 - Add departments, roles and employees
-- View departments, roles, and employees
+
+### View
+- View departments, roles and employees
+- View total utilized budget of a department
+- View employees by manager
+
+### Update
 - Update employee roles
+- Update employee managers
+
+### Delete
+- Delete departments, roles and employees
+
 
 All information is stored, retrieved and modified using MySQL.
 
