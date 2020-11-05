@@ -168,7 +168,7 @@ async function askUpdateEmployeeRole(employees, roles) {
       message: "Which employee's role would you like to update?",
       choices: () => employees.map(employee =>
         { return {
-          name: `${employee.name} | ${employee.title}`,
+          name: `${employee.name}, ${employee.title}`,
           value: employee.id,
           }
         }
