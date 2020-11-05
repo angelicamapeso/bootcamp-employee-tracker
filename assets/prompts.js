@@ -9,8 +9,11 @@ const mainMenuChoices = require('./constants/mainMenuChoices.js');
 const [DEPARTMENT_TABLE, ROLE_TABLE, EMPLOYEE_TABLE] = mainMenuChoices.tables;
 const QUIT = mainMenuChoices.quit;
 
+//Wrapping all prompt functions in object
+const prompts = {};
+
 //Main Menu
-async function mainMenu() {
+prompts.mainMenu = async () => {
   const mainMenuChoice = await inquirer.prompt([
     {
       type: 'list',
@@ -57,7 +60,7 @@ async function mainMenu() {
 
 //----- DEPARTMENT PROMPTS -----//
 //Use when creating new department
-async function askDepartmentInfo() {
+prompts.askDepartmentInfo = async () => {
   const departmentInfo = await inquirer.prompt([
     {
       type: 'input',
@@ -74,7 +77,7 @@ async function askDepartmentInfo() {
 }
 
 //Use when deleting department
-async function askDeleteDepartment(departments) {
+prompts.askDeleteDepartment = async (departments) => {
   const departmentChoice = await inquirer.prompt([
     {
       type: 'list',
@@ -90,7 +93,7 @@ async function askDeleteDepartment(departments) {
 
 //------ ROLE PROMPTS -----//
 //Use when creating new role
-async function askRoleInfo(departments) {
+prompts.askRoleInfo = async (departments) => {
   const roleInfo = await inquirer.prompt([
     {
       type: 'input',
@@ -132,7 +135,7 @@ async function askRoleInfo(departments) {
   return roleInfo;
 }
 
-async function askDeleteRole(roles) {
+prompts.askDeleteRole = async (roles) => {
   const roleChoice = await inquirer.prompt([
     {
       type: 'list',
@@ -148,7 +151,7 @@ async function askDeleteRole(roles) {
 
 //------ EMPLOYEE PROMPTS -----//
 //Use when creating new employee
-async function askEmployeeInfo(roles, employees) {
+prompts.askEmployeeInfo = async (roles, employees) => {
   const employeeInfo = await inquirer.prompt([
     {
       type: 'input',
@@ -191,7 +194,7 @@ async function askEmployeeInfo(roles, employees) {
 }
 
 //Use when updating employee's role
-async function askUpdateEmployeeRole(employees, roles) {
+prompts.askUpdateEmployeeRole = async (employees, roles) => {
   const updateEmployeeRoleInfo = await inquirer.prompt([
     {
       type: 'list',
@@ -218,12 +221,4 @@ async function askUpdateEmployeeRole(employees, roles) {
   return updateEmployeeRoleInfo;
 }
 
-module.exports = {
-  mainMenu,
-  askDepartmentInfo,
-  askRoleInfo,
-  askEmployeeInfo,
-  askUpdateEmployeeRole,
-  askDeleteDepartment,
-  askDeleteRole,
-};
+module.exports = prompts;
