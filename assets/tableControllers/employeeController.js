@@ -99,4 +99,21 @@ employeeController.selectByManager = async function(roleTableName, managerId) {
   }
 }
 
+employeeController.getUtilizedBudget = async function(roleTableName, departmentId) {
+  try {
+    this.checkConnection();
+    const joinQuery = `
+      SELECT
+        SUM(${roleTableName}.salary) AS utilizedBudget
+      FROM ${this.name}
+      LEFT JOIN ${roleTableName} ON ${this.name}.role_id = ${roleTableName}.id
+      WHERE ${roleTableName}.department_id = ${departmentId}
+    `;
+    const [[{utilizedBudget}]] = await this.connection.query(joinQuery);
+    return utilizedBudget;
+  } catch(error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
 module.exports = employeeController;
