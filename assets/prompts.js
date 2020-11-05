@@ -86,7 +86,7 @@ async function askRoleInfo(departments) {
       filter: title => title.trim(),
     },
     {
-      type: 'input',
+      type: 'number',
       name: 'salary',
       message: 'What is the salary of the new role?',
       validate: salary => {
@@ -102,7 +102,7 @@ async function askRoleInfo(departments) {
           return 'Salary cannot be empty!';
         }
       },
-      filter: salary => salary.trim(),
+      filter: salary => salary ? salary.toFixed(2) : '',
     },
     {
       type: 'list',
